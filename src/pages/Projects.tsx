@@ -44,7 +44,6 @@ const projects = [
     github: "https://github.com/example/ml-visualizer",
     live: "",
   },
-  // ----- Additional 10 projects below -----
   {
     name: "Web Scraper Pro",
     description: "A smart web scraping tool built with Node.js that extracts and structures large-scale data for analytics.",
@@ -107,42 +106,6 @@ const projects = [
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
     github: "https://github.com/example/smart-home-control",
     live: "https://smarthome.example.com",
-  },
-  {
-    name: "Crypto Tracker",
-    description: "Real-time cryptocurrency price tracker with historical charts and price alerts.",
-    techStack: ["React", "Redux", "Recharts"],
-    year: 2024,
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
-    github: "https://github.com/example/crypto-tracker",
-    live: "",
-  },
-  {
-    name: "Event Planner AI",
-    description: "Automated event planning app that suggests vendors, builds schedules, and manages attendees.",
-    techStack: ["Angular", "TypeScript", "AI"],
-    year: 2023,
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600&q=80",
-    github: "https://github.com/example/event-planner-ai",
-    live: "https://eventplannerai.example.com",
-  },
-  {
-    name: "Portfolio Generator",
-    description: "Instantly generate a personal developer portfolio from your GitHub profile data.",
-    techStack: ["React", "Tailwind", "GraphQL"],
-    year: 2022,
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
-    github: "https://github.com/example/portfolio-generator",
-    live: "",
-  },
-  {
-    name: "AI Quiz Builder",
-    description: "Create and share AI-generated quizzes for any topic in seconds.",
-    techStack: ["Vue", "TypeScript", "OpenAI API"],
-    year: 2024,
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80",
-    github: "https://github.com/example/ai-quiz-builder",
-    live: "",
   },
 ];
 
