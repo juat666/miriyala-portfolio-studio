@@ -36,7 +36,7 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`text-muted-foreground/90 hover:text-primary transition-colors font-medium ${
+              className={`story-link hover-scale text-muted-foreground/90 hover:text-primary transition-colors font-medium ${
                 location.pathname === item.path ? "text-primary font-semibold" : ""
               }`}
             >
@@ -61,7 +61,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`w-full py-2 text-base ${
+                className={`story-link hover-scale w-full py-2 text-base transition-colors ${
                   location.pathname === item.path
                     ? "text-primary font-semibold"
                     : "text-muted-foreground hover:text-primary"
@@ -78,3 +78,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
