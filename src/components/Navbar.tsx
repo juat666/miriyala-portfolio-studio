@@ -1,6 +1,8 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -10,25 +12,69 @@ const navItems = [
   { name: "Contact", path: "/contact" },
 ];
 
-const Navbar = () => (
-  <nav className="bg-background border-b border-muted-foreground/10 sticky top-0 z-20">
-    <div className="container mx-auto px-4 flex h-16 items-center justify-between">
-      <Link to="/" className="text-xl font-bold tracking-tight hover:opacity-80">
-        Kundhan Miriyala
-      </Link>
-      <div className="flex gap-5">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            to={item.path}
-            className="text-muted-foreground/90 hover:text-primary transition-colors font-medium"
-          >
-            {item.name}
-          </Link>
-        ))}
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Close menu when route changes
+  React.useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <nav className="bg-background border-b border-muted-foreground/10 sticky top-0 z-20 w-full">
+      <div className="container mx-auto px-4 flex h-16 items-center justify-between">
+        <Link 
+          to="/" 
+          className="text-xl font-bold tracking-tight hover:opacity-80 whitespace-nowrap"
+        >
+          Kundhan Miriyala
+        </Link>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex gap-5">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className={`text-muted-foreground/90 hover:text-primary transition-colors font-medium ${
+                location.pathname === item.path ? "text-primary font-semibold" : ""
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+        {/* Mobile Burger */}
+        <button
+          className="md:hidden p-2 rounded hover:bg-muted focus:outline-none"
+          aria-label="Open menu"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
-    </div>
-  </nav>
-);
+      {/* Mobile Menu Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden bg-background border-b border-border px-4 py-2 pb-4 animate-fade-in absolute w-full left-0 top-16 z-30 shadow-lg">
+          <div className="flex flex-col gap-3 items-start">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`w-full py-2 text-base ${
+                  location.pathname === item.path
+                    ? "text-primary font-semibold"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
 
 export default Navbar;
