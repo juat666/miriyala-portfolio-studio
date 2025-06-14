@@ -1,11 +1,12 @@
-
 import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <ThemeToggle />
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
         {/* Gradient background */}
@@ -44,28 +45,10 @@ const Index = () => {
               <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">LangChain</li>
             </ul>
             {/* Quick Stats/Bio */}
+            {/* Removed the five bio stat <li> items as requested */}
             <div className="w-full mb-6">
               <ul className="space-y-1 text-left text-sm md:text-base text-foreground/90 font-inter">
-                <li>
-                  <span className="mr-2" role="img" aria-label="graduation cap">🎓</span>
-                  <strong>2nd Year BTech Student –</strong> Artificial Intelligence & Data Science @ Amrita Vishwa Vidyapeetham
-                </li>
-                <li>
-                  <span className="mr-2" role="img" aria-label="laptop">👨‍💻</span>
-                  <strong>10+ AI Projects –</strong> including LLM agents, hybrid encryption tools, and real-time subtitle matchers
-                </li>
-                <li>
-                  <span className="mr-2" role="img" aria-label="rocket">🚀</span>
-                  <strong>Founder –</strong> Kenatics, a startup helping SMBs innovate with data and cloud tech
-                </li>
-                <li>
-                  <span className="mr-2" role="img" aria-label="handshake">🤝</span>
-                  Open Source Contributor & Tech Club Member
-                </li>
-                <li>
-                  <span className="mr-2" role="img" aria-label="calendar">📅</span>
-                  Learning & building 6 hours/day (10 hrs on Sundays!)
-                </li>
+                {/* --- removed bio stats per user request --- */}
               </ul>
             </div>
             <div className="flex gap-4 mb-2">
@@ -121,7 +104,6 @@ const Index = () => {
           </span>
         </section>
       </main>
-      {/* Simple Footer */}
       <footer className="bg-muted/50 border-t border-border text-muted-foreground py-4 mt-8 text-sm text-center relative z-10 shadow-inner">
         &copy; {new Date().getFullYear()} Kundhan Miriyala · Built with AI, code, and curiosity.
       </footer>
