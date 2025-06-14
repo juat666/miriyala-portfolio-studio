@@ -42,10 +42,11 @@ const Index = () => {
               <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">UI/UX Design</li>
               <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">LangChain</li>
             </ul>
-            <p className="text-lg md:text-xl text-muted-foreground font-inter mb-6 max-w-xl">
-              Empowering the next generation of tech talent by building robust digital experiences and sharing solutions.  
-              <br className="hidden md:block" />
-              For potential employers, collaborators, investors, and newcomers—let’s innovate together!
+            <p className="text-lg md:text-xl text-muted-foreground font-inter mb-2 max-w-xl">
+              Problem solving drives innovation.
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground font-inter mb-6 max-w-xl">
+              Empowering the next generation of tech talent by building robust digital experiences and sharing solutions.
             </p>
             <div className="flex gap-4">
               <Link to="/projects" tabIndex={-1}>
@@ -67,4 +68,3 @@ const Index = () => {
 };
 
 export default Index;
-
