@@ -7,8 +7,12 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+      <main className="flex-1 flex items-center justify-center px-4 py-12 relative overflow-hidden">
+        {/* Gradient background */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none select-none z-0">
+          <div className="w-full h-full bg-gradient-to-br from-blue-100/60 via-purple-100/40 to-pink-100/60 dark:from-indigo-900/60 dark:via-slate-900/50 dark:to-fuchsia-900/60 blur-lg opacity-70 animate-fade-in" />
+        </div>
+        <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
           {/* Image */}
           <div className="w-full md:w-2/5 flex justify-center">
             <img
@@ -50,3 +54,4 @@ const Index = () => {
 };
 
 export default Index;
+
