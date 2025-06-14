@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
@@ -6,6 +5,7 @@ import React from "react";
 import WorkExperienceSection from "@/components/WorkExperienceSection";
 import EducationSection from "@/components/EducationSection";
 import type { TimelineItem } from "@/components/ExperienceTimeline";
+import AboutHighlights from "@/components/AboutHighlights";
 
 // Work experience data (each will be one ExperienceTimeline item)
 const workExperience: TimelineItem[] = [
@@ -144,6 +144,27 @@ const About = () => (
             </ul>
           </div>
         </div>
+        {/* Highlights Section */}
+        <AboutHighlights
+          goodAt={[
+            "Python & TypeScript",
+            "Machine Learning",
+            "React & Frontend",
+            "Problem Solving",
+          ]}
+          interestedAt={[
+            "Reinforcement Learning",
+            "AI Product Design",
+            "MLOps & scalability",
+            "Effective Teamwork",
+          ]}
+          workAt={[
+            "Startup XYZ (ML Intern)",
+            "Student Research Clubs",
+            "Hackathons & Open Source",
+          ]}
+        />
+
         {/* Work Experience Timeline Section */}
         <WorkExperienceSection items={workExperience} />
         {/* Education Timeline Section */}
@@ -173,4 +194,3 @@ const About = () => (
 );
 
 export default About;
-
