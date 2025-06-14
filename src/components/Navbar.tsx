@@ -16,7 +16,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Close menu when route changes
   React.useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -26,7 +25,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex h-16 items-center justify-between">
         <Link 
           to="/" 
-          className="text-xl font-bold tracking-tight hover:opacity-80 whitespace-nowrap"
+          className="text-xl font-bold tracking-tight hover:opacity-80 whitespace-nowrap font-playfair"
         >
           Kundhan Miriyala
         </Link>
@@ -36,7 +35,7 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`story-link hover-scale text-muted-foreground/90 hover:text-primary transition-colors font-medium ${
+              className={`story-link hover-scale text-muted-foreground/90 hover:text-primary transition-colors font-medium font-inter ${
                 location.pathname === item.path ? "text-primary font-semibold" : ""
               }`}
             >
@@ -61,7 +60,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`story-link hover-scale w-full py-2 text-base transition-colors ${
+                className={`story-link hover-scale w-full py-2 text-base transition-colors font-inter ${
                   location.pathname === item.path
                     ? "text-primary font-semibold"
                     : "text-muted-foreground hover:text-primary"
@@ -78,4 +77,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
