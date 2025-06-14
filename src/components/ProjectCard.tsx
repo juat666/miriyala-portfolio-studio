@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github } from "lucide-react";
+import { Github, Play } from "lucide-react";
 
 export interface ProjectData {
   name: string;
@@ -19,14 +19,32 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  // Handler for play button click
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevents card click if there is one
+    console.log(`Play video for ${project.name}`);
+    // Future: open a modal or play video here!
+  };
+
   return (
     <Card className="transition-shadow hover:shadow-lg bg-card animate-fade-in flex flex-col h-full">
-      <img
-        src={project.image}
-        alt={project.name}
-        className="rounded-t-lg w-full h-40 object-cover"
-        loading="lazy"
-      />
+      <div className="relative">
+        <img
+          src={project.image}
+          alt={project.name}
+          className="rounded-t-lg w-full h-40 object-cover"
+          loading="lazy"
+        />
+        {/* Video button overlay top-right */}
+        <button
+          onClick={handlePlayClick}
+          className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 rounded-full p-1 shadow focus:outline-none focus:ring-2 focus:ring-primary z-10 transition"
+          type="button"
+          aria-label="Play project video"
+        >
+          <Play className="w-6 h-6 text-white" />
+        </button>
+      </div>
       <CardHeader>
         <CardTitle className="font-playfair text-xl">{project.name}</CardTitle>
         <CardDescription>{project.year}</CardDescription>
