@@ -1,3 +1,4 @@
+
 import React from "react";
 import Navbar from "@/components/Navbar";
 import { Badge } from "@/components/ui/badge";
@@ -113,6 +114,9 @@ const projects = [
   },
 ];
 
+// Let's define the indices of featured projects (customize this logic as you wish)
+const FEATURED_PROJECTS_INDICES = [0, 1, 2];
+
 // Collect all unique techs for filtering
 const allTechs = Array.from(
   new Set(projects.flatMap((p) => p.techStack)),
@@ -124,17 +128,25 @@ const LOAD_MORE_COUNT = 6;
 
 const Projects = () => {
   const [selectedTech, setSelectedTech] = React.useState<string | null>(null);
-  const [sortDirection, setSortDirection] = React.useState<"desc" | "asc">("desc");
+  const [sortDirection, setSortDirection] = React.useState<"desc" | "asc" | "featured">("desc");
   const [displayCount, setDisplayCount] = React.useState(INITIAL_DISPLAY_COUNT);
 
-  // Filter and sort logic
+  // Filter logic
   let filteredProjects = selectedTech
     ? projects.filter((p) => p.techStack.includes(selectedTech))
     : projects;
 
-  filteredProjects = [...filteredProjects].sort((a, b) =>
-    sortDirection === "desc" ? b.year - a.year : a.year - b.year
-  );
+  // Sorting logic
+  if (sortDirection === "featured") {
+    // Place featured projects first, the rest after (preserving original order)
+    const featured = filteredProjects.filter((_, idx) => FEATURED_PROJECTS_INDICES.includes(idx));
+    const rest = filteredProjects.filter((_, idx) => !FEATURED_PROJECTS_INDICES.includes(idx));
+    filteredProjects = [...featured, ...rest];
+  } else {
+    filteredProjects = [...filteredProjects].sort((a, b) =>
+      sortDirection === "desc" ? b.year - a.year : a.year - b.year
+    );
+  }
 
   // Slice projects for display
   const displayedProjects = filteredProjects.slice(0, displayCount);

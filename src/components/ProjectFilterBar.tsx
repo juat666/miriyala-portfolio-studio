@@ -12,9 +12,9 @@ import {
 interface ProjectFilterBarProps {
   allTechs: string[];
   selectedTech: string | null;
-  sortDirection: "desc" | "asc";
+  sortDirection: "desc" | "asc" | "featured";
   setSelectedTech: (tech: string | null) => void;
-  setSortDirection: (direction: "desc" | "asc") => void;
+  setSortDirection: (direction: "desc" | "asc" | "featured") => void;
 }
 
 const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({
@@ -50,16 +50,23 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({
       <div className="flex-shrink-0">
         <Select
           value={sortDirection}
-          onValueChange={(v) => setSortDirection(v as "desc" | "asc")}
+          onValueChange={(v) => setSortDirection(v as "desc" | "asc" | "featured")}
         >
           <SelectTrigger className="w-36">
             <SelectValue>
-              Sort: {sortDirection === "desc" ? "Most Recent" : "Oldest"}
+              Sort: {
+                sortDirection === "desc"
+                  ? "Most Recent"
+                  : sortDirection === "asc"
+                  ? "Oldest"
+                  : "Featured"
+              }
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="desc">Most Recent</SelectItem>
             <SelectItem value="asc">Oldest</SelectItem>
+            <SelectItem value="featured">Featured</SelectItem>
           </SelectContent>
         </Select>
       </div>
