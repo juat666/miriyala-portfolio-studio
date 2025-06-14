@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
 import React from "react";
 import ExperienceTimeline, { ExperienceTimelineProps } from "@/components/ExperienceTimeline";
+import WorkExperienceSection from "@/components/WorkExperienceSection";
+import EducationSection from "@/components/EducationSection";
 
 // Social links: add socials as needed
 const socials = [
@@ -19,7 +21,7 @@ const socials = [
 ];
 
 // Explicitly type as TimelineItem[] for both arrays
-const workExperience: ExperienceTimelineProps["items"] = [
+const workExperience = [
   {
     id: "exp1",
     type: "work",
@@ -52,9 +54,21 @@ const workExperience: ExperienceTimelineProps["items"] = [
     ],
     techs: ["Python", "PyTorch", "Pandas", "scikit-learn"],
   },
+  // You can add a new work experience object here:
+  // {
+  //   id: "exp3",
+  //   type: "work",
+  //   title: "New Job Title",
+  //   org: "New Organization",
+  //   location: "City, Country",
+  //   period: "Start – End",
+  //   description: "...",
+  //   achievements: [/* ... */],
+  //   techs: [/* ... */],
+  // },
 ];
 
-const education: ExperienceTimelineProps["items"] = [
+const education = [
   {
     id: "edu1",
     type: "education",
@@ -166,15 +180,9 @@ const About = () => (
           </div>
         </div>
         {/* Work Experience Section */}
-        <div className="mt-12">
-          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">Work Experience</h2>
-          <ExperienceTimeline items={workExperience} accent="primary" />
-        </div>
+        <WorkExperienceSection items={workExperience} />
         {/* Education Section */}
-        <div className="mt-12">
-          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">Education</h2>
-          <ExperienceTimeline items={education} accent="secondary" />
-        </div>
+        <EducationSection items={education} />
         {/* Download CV Button */}
         <div className="mt-12 flex justify-center">
           <Button
