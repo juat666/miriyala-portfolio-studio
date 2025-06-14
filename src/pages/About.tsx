@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
@@ -5,6 +6,8 @@ import React from "react";
 import ExperienceTimeline, { ExperienceTimelineProps } from "@/components/ExperienceTimeline";
 import WorkExperienceSection from "@/components/WorkExperienceSection";
 import EducationSection from "@/components/EducationSection";
+// ADD THIS IMPORT
+import type { TimelineItem } from "@/components/ExperienceTimeline";
 
 // Social links: add socials as needed
 const socials = [
@@ -21,7 +24,7 @@ const socials = [
 ];
 
 // Explicitly type as TimelineItem[] for both arrays
-const workExperience = [
+const workExperience: TimelineItem[] = [
   {
     id: "exp1",
     type: "work",
@@ -68,7 +71,7 @@ const workExperience = [
   // },
 ];
 
-const education = [
+const education: TimelineItem[] = [
   {
     id: "edu1",
     type: "education",
@@ -208,3 +211,4 @@ const About = () => (
 );
 
 export default About;
+
