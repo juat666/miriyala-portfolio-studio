@@ -1,11 +1,8 @@
-
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
 import React from "react";
-
-const profilePic =
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=facearea&w=320&h=320&facepad=3";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
 
 // Social links: add socials as needed
 const socials = [
@@ -21,18 +18,58 @@ const socials = [
   },
 ];
 
-const workTimeline = [
+// Separate data for work and education
+const workExperience = [
   {
+    id: "exp1",
+    type: "work",
     title: "Machine Learning Intern",
     org: "Startup XYZ",
+    location: "Remote",
     period: "May 2024 – Jul 2024",
-    desc: "Worked on developing reinforcement learning agents for real-world scenarios."
+    description:
+      "Developed reinforcement learning agents for logistics scheduling, resulting in 20% efficiency increase. Collaborated on state-of-the-art RL research applied to real-world problems.",
+    achievements: [
+      "Built scalable RL pipelines for simulation",
+      "Published internal whitepaper on RL tuning",
+      "Demoed project to C-level stakeholders"
+    ],
+    techs: ["Python", "TensorFlow", "RLlib", "Docker"],
   },
   {
+    id: "exp2",
+    type: "work",
     title: "AI & Data Science Student",
     org: "Your University",
+    location: "Hyderabad, India",
     period: "2022 – Present",
-    desc: "Majoring in AI and Data Science with projects ranging from ML to deep learning."
+    description:
+      "Majoring in AI & Data Science with hands-on experience in ML, deep learning, and applied AI. Led multiple capstone projects in RL and MLOps.",
+    achievements: [
+      "Dean’s List, 3 semesters",
+      "Led a student ML research club",
+      "Organized HackAI 2024 campus edition"
+    ],
+    techs: ["Python", "PyTorch", "Pandas", "scikit-learn"],
+  },
+];
+
+const education = [
+  {
+    id: "edu1",
+    type: "education",
+    title: "B.Tech in AI & Data Science",
+    org: "Your University",
+    location: "Hyderabad, India",
+    period: "2022 – Present",
+    description:
+      "Core coursework in deep learning, probability, statistics, and artificial intelligence. Participated in research seminars and open source academic projects.",
+    achievements: [
+      "Google AI Scholarship Recipient (2023)",
+      "TensorFlow Developer Certificate (2024)",
+      "Research on RL for Smart Grids"
+    ],
+    techs: ["Python", "TensorFlow", "Research", "Statistics"]
   }
 ];
 
@@ -46,11 +83,13 @@ const About = () => (
   <div className="min-h-screen flex flex-col bg-background">
     <Navbar />
     <main className="flex-1 flex items-center justify-center px-4 py-12">
-      <section className="max-w-2xl w-full mx-auto animate-fade-in">
+      <section className="max-w-3xl w-full mx-auto animate-fade-in">
         {/* Profile picture & Name */}
         <div className="flex flex-col items-center gap-3 mb-6">
           <img
-            src={profilePic}
+            src={
+              "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=facearea&w=320&h=320&facepad=3"
+            }
             alt="Profile"
             className="w-28 h-28 rounded-full object-cover border-2 border-primary shadow-lg"
             loading="lazy"
@@ -61,7 +100,18 @@ const About = () => (
           </span>
           {/* Social Links */}
           <div className="flex gap-4 mt-1">
-            {socials.map(({ name, url, icon: Icon }) => (
+            {[
+              {
+                name: "GitHub",
+                url: "https://github.com/kundhanmiriyala",
+                icon: Github,
+              },
+              {
+                name: "LinkedIn",
+                url: "https://linkedin.com/in/kundhanmiriyala",
+                icon: Linkedin,
+              },
+            ].map(({ name, url, icon: Icon }) => (
               <a
                 key={name}
                 href={url}
@@ -83,7 +133,7 @@ const About = () => (
             Always eager to explore, learn, and share knowledge.
           </p>
         </div>
-        {/* Structured Details */}
+        {/* Three-column: Background/Skills/Hobbies */}
         <div className="grid gap-6 md:grid-cols-3 text-left">
           {/* Background */}
           <div>
@@ -115,33 +165,18 @@ const About = () => (
             </ul>
           </div>
         </div>
-        {/* Timeline: Work Experience & Education */}
-        <div className="mt-10">
-          <h2 className="font-bold text-primary mb-4 font-playfair text-xl text-center md:text-left">Work Experience & Education</h2>
-          <ol className="relative border-l-2 border-primary/20 pl-6 space-y-6 font-inter">
-            {workTimeline.map(({ title, org, period, desc }, idx) => (
-              <li key={idx} className="ml-2">
-                <div className="absolute -left-3.5 mt-2 w-3 h-3 bg-primary rounded-full border-2 border-background"></div>
-                <div>
-                  <span className="font-semibold text-primary">{title}</span>
-                  <span className="block text-xs text-muted-foreground">{org} • {period}</span>
-                  <span className="block text-sm mt-1 text-muted-foreground">{desc}</span>
-                </div>
-              </li>
-            ))}
-          </ol>
+        {/* Work Experience Section */}
+        <div className="mt-12">
+          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">Work Experience</h2>
+          <ExperienceTimeline items={workExperience} accent="primary" />
         </div>
-        {/* Achievements / Certifications */}
-        <div className="mt-10">
-          <h2 className="font-bold text-primary mb-4 font-playfair text-xl text-center md:text-left">Achievements & Certifications</h2>
-          <ul className="list-disc list-inside text-muted-foreground text-sm font-inter space-y-1">
-            {achievements.map((ach, idx) => (
-              <li key={idx}>{ach}</li>
-            ))}
-          </ul>
+        {/* Education Section */}
+        <div className="mt-12">
+          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">Education</h2>
+          <ExperienceTimeline items={education} accent="secondary" />
         </div>
         {/* Download CV Button */}
-        <div className="mt-8 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <Button
             asChild
             variant="outline"
@@ -165,4 +200,3 @@ const About = () => (
 );
 
 export default About;
-
