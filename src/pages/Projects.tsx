@@ -1,4 +1,3 @@
-
 import React from "react";
 import Navbar from "@/components/Navbar";
 import { Badge } from "@/components/ui/badge";
@@ -112,10 +111,21 @@ const projects = [
     github: "https://github.com/example/smart-home-control",
     live: "https://smarthome.example.com",
   },
+  {
+    name: "Portfolio Analyzer",
+    description:
+      "An analytics dashboard for personal portfolios with export and visualization features.",
+    techStack: ["React", "Tailwind", "D3.js"],
+    year: 2025,
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    github: "https://github.com/example/portfolio-analyzer",
+    live: "https://portfolio-analyzer.example.com",
+  },
 ];
 
 // Let's define the indices of featured projects (customize this logic as you wish)
-const FEATURED_PROJECTS_INDICES = [0, 1, 2];
+// The new project is added at the last position, so use projects.length-1
+const FEATURED_PROJECTS_INDICES = [0, 1, 2, projects.length - 1];
 
 // Collect all unique techs for filtering
 const allTechs = Array.from(
