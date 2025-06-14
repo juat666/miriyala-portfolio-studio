@@ -3,10 +3,10 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
 import React from "react";
-import WorkExperienceItem from "@/components/WorkExperienceItem";
-import EducationItem from "@/components/EducationItem";
+import WorkExperienceSection from "@/components/WorkExperienceSection";
+import EducationSection from "@/components/EducationSection";
 
-// Work experience data (each will be one <WorkExperienceItem>)
+// Work experience data (each will be one ExperienceTimeline item)
 const workExperience = [
   {
     title: "Machine Learning Intern",
@@ -21,6 +21,8 @@ const workExperience = [
       "Demoed project to C-level stakeholders"
     ],
     techs: ["Python", "TensorFlow", "RLlib", "Docker"],
+    type: "work",
+    id: "work-1"
   },
   {
     title: "AI & Data Science Student",
@@ -35,10 +37,12 @@ const workExperience = [
       "Organized HackAI 2024 campus edition"
     ],
     techs: ["Python", "PyTorch", "Pandas", "scikit-learn"],
+    type: "work",
+    id: "work-2"
   },
 ];
 
-// Education data (each will be one <EducationItem>)
+// Education data (each will be one ExperienceTimeline item)
 const education = [
   {
     title: "B.Tech in AI & Data Science",
@@ -52,7 +56,9 @@ const education = [
       "TensorFlow Developer Certificate (2024)",
       "Research on RL for Smart Grids"
     ],
-    techs: ["Python", "TensorFlow", "Research", "Statistics"]
+    techs: ["Python", "TensorFlow", "Research", "Statistics"],
+    type: "education",
+    id: "edu-1"
   }
 ];
 
@@ -137,24 +143,10 @@ const About = () => (
             </ul>
           </div>
         </div>
-        {/* Work Experience Section */}
-        <section className="mt-12">
-          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">
-            Work Experience
-          </h2>
-          {workExperience.map((item, idx) => (
-            <WorkExperienceItem key={idx} {...item} />
-          ))}
-        </section>
-        {/* Education Section */}
-        <section className="mt-12">
-          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">
-            Education
-          </h2>
-          {education.map((item, idx) => (
-            <EducationItem key={idx} {...item} />
-          ))}
-        </section>
+        {/* Work Experience Timeline Section */}
+        <WorkExperienceSection items={workExperience} />
+        {/* Education Timeline Section */}
+        <EducationSection items={education} />
         {/* Download CV Button */}
         <div className="mt-12 flex justify-center">
           <Button
@@ -180,3 +172,4 @@ const About = () => (
 );
 
 export default About;
+
