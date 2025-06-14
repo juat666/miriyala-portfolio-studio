@@ -25,28 +25,21 @@ const Index = () => {
           </div>
           {/* Text Content */}
           <div className="w-full md:w-3/5 text-center md:text-left flex flex-col items-center md:items-start">
-            <h1 className="text-4xl md:text-5xl font-playfair font-bold leading-tight mb-4">
-              Kundhan Miriyala
+            <h1 className="text-4xl md:text-5xl font-playfair font-bold leading-tight mb-2">
+              Problem solving drives innovation.
             </h1>
-            <h2 className="text-2xl md:text-3xl font-inter text-primary mb-2 font-semibold">
-              Innovative Software Engineer & Aspiring Entrepreneur
+            <h2 className="text-xl md:text-2xl font-inter text-primary mb-3 font-semibold">
+              AI Enthusiast &bull; Problem Solver
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground font-inter mb-2 font-medium">
-              AI Enthusiast&nbsp;&bull;&nbsp;Tech Problem Solver&nbsp;&bull;&nbsp;Community Builder
-            </p>
             <ul className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start text-sm md:text-base">
-              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">React</li>
-              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">TypeScript</li>
-              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">Node.js</li>
               <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">Python</li>
-              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">UI/UX Design</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">LLM</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">PyTorch</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">Transformers</li>
               <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">LangChain</li>
             </ul>
-            <p className="text-lg md:text-xl text-muted-foreground font-inter mb-2 max-w-xl">
-              Problem solving drives innovation.
-            </p>
             <p className="text-base md:text-lg text-muted-foreground font-inter mb-6 max-w-xl">
-              Empowering the next generation of tech talent by building robust digital experiences and sharing solutions.
+              Exploring and building with the latest in AI, machine learning, and language models.
             </p>
             <div className="flex gap-4">
               <Link to="/projects" tabIndex={-1}>
@@ -68,3 +61,4 @@ const Index = () => {
 };
 
 export default Index;
+
