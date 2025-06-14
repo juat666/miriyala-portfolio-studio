@@ -3,31 +3,12 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
 import React from "react";
-import ExperienceTimeline, { ExperienceTimelineProps } from "@/components/ExperienceTimeline";
-import WorkExperienceSection from "@/components/WorkExperienceSection";
-import EducationSection from "@/components/EducationSection";
-// ADD THIS IMPORT
-import type { TimelineItem } from "@/components/ExperienceTimeline";
+import WorkExperienceItem from "@/components/WorkExperienceItem";
+import EducationItem from "@/components/EducationItem";
 
-// Social links: add socials as needed
-const socials = [
+// Work experience data (each will be one <WorkExperienceItem>)
+const workExperience = [
   {
-    name: "GitHub",
-    url: "https://github.com/kundhanmiriyala",
-    icon: Github,
-  },
-  {
-    name: "LinkedIn",
-    url: "https://linkedin.com/in/kundhanmiriyala",
-    icon: Linkedin,
-  },
-];
-
-// Explicitly type as TimelineItem[] for both arrays
-const workExperience: TimelineItem[] = [
-  {
-    id: "exp1",
-    type: "work",
     title: "Machine Learning Intern",
     org: "Startup XYZ",
     location: "Remote",
@@ -42,8 +23,6 @@ const workExperience: TimelineItem[] = [
     techs: ["Python", "TensorFlow", "RLlib", "Docker"],
   },
   {
-    id: "exp2",
-    type: "work",
     title: "AI & Data Science Student",
     org: "Your University",
     location: "Hyderabad, India",
@@ -57,24 +36,11 @@ const workExperience: TimelineItem[] = [
     ],
     techs: ["Python", "PyTorch", "Pandas", "scikit-learn"],
   },
-  // You can add a new work experience object here:
-  // {
-  //   id: "exp3",
-  //   type: "work",
-  //   title: "New Job Title",
-  //   org: "New Organization",
-  //   location: "City, Country",
-  //   period: "Start – End",
-  //   description: "...",
-  //   achievements: [/* ... */],
-  //   techs: [/* ... */],
-  // },
 ];
 
-const education: TimelineItem[] = [
+// Education data (each will be one <EducationItem>)
+const education = [
   {
-    id: "edu1",
-    type: "education",
     title: "B.Tech in AI & Data Science",
     org: "Your University",
     location: "Hyderabad, India",
@@ -88,12 +54,6 @@ const education: TimelineItem[] = [
     ],
     techs: ["Python", "TensorFlow", "Research", "Statistics"]
   }
-];
-
-const achievements = [
-  "Google AI Scholarship Recipient (2023)",
-  "Won HackAI 2024 (Best Use of AI award)",
-  "TensorFlow Developer Certificate (2024)"
 ];
 
 const About = () => (
@@ -117,29 +77,24 @@ const About = () => (
           </span>
           {/* Social Links */}
           <div className="flex gap-4 mt-1">
-            {[
-              {
-                name: "GitHub",
-                url: "https://github.com/kundhanmiriyala",
-                icon: Github,
-              },
-              {
-                name: "LinkedIn",
-                url: "https://linkedin.com/in/kundhanmiriyala",
-                icon: Linkedin,
-              },
-            ].map(({ name, url, icon: Icon }) => (
-              <a
-                key={name}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={name}
-                className="hover:text-primary/90 text-muted-foreground transition-colors"
-              >
-                <Icon className="w-6 h-6" />
-              </a>
-            ))}
+            <a
+              href="https://github.com/kundhanmiriyala"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="hover:text-primary/90 text-muted-foreground transition-colors"
+            >
+              <Github className="w-6 h-6" />
+            </a>
+            <a
+              href="https://linkedin.com/in/kundhanmiriyala"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="hover:text-primary/90 text-muted-foreground transition-colors"
+            >
+              <Linkedin className="w-6 h-6" />
+            </a>
           </div>
         </div>
         {/* Short Bio */}
@@ -183,9 +138,23 @@ const About = () => (
           </div>
         </div>
         {/* Work Experience Section */}
-        <WorkExperienceSection items={workExperience} />
+        <section className="mt-12">
+          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">
+            Work Experience
+          </h2>
+          {workExperience.map((item, idx) => (
+            <WorkExperienceItem key={idx} {...item} />
+          ))}
+        </section>
         {/* Education Section */}
-        <EducationSection items={education} />
+        <section className="mt-12">
+          <h2 className="font-bold text-primary mb-4 font-playfair text-2xl text-center md:text-left">
+            Education
+          </h2>
+          {education.map((item, idx) => (
+            <EducationItem key={idx} {...item} />
+          ))}
+        </section>
         {/* Download CV Button */}
         <div className="mt-12 flex justify-center">
           <Button
@@ -211,4 +180,3 @@ const About = () => (
 );
 
 export default About;
-
