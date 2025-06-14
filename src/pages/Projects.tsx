@@ -199,7 +199,7 @@ const Projects = () => {
             Filter by technology and explore the highlights below!
           </p>
           {/* Filter + Sort Bar */}
-          <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
             {/* Filter Bar */}
             <div className="flex flex-wrap gap-2">
               <Badge
@@ -220,8 +220,8 @@ const Projects = () => {
                 </Badge>
               ))}
             </div>
-            {/* Sort */}
-            <div>
+            {/* Sort Control */}
+            <div className="flex-shrink-0">
               <Select
                 value={sortDirection}
                 onValueChange={(v) => setSortDirection(v as "desc" | "asc")}
@@ -238,6 +238,12 @@ const Projects = () => {
               </Select>
             </div>
           </div>
+          {/* Stack count info message */}
+          {allTechs.length > 10 && (
+            <div className="mb-6 px-4 py-2 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded font-inter text-sm">
+              Too many tech stacks? Try narrowing your filter for a better experience.
+            </div>
+          )}
           {/* Projects Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {displayedProjects.map((proj) => (
