@@ -1,8 +1,9 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Play } from "lucide-react";
+import ProjectVideoDialog from "./ProjectVideoDialog";
 
 export interface ProjectData {
   name: string;
@@ -12,6 +13,7 @@ export interface ProjectData {
   image: string;
   github?: string;
   live?: string;
+  videoUrl?: string; // <-- added
 }
 
 interface ProjectCardProps {
@@ -19,11 +21,13 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  // Dialog state
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   // Handler for play button click
   const handlePlayClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevents card click if there is one
-    console.log(`Play video for ${project.name}`);
-    // Future: open a modal or play video here!
+    e.stopPropagation();
+    setDialogOpen(true);
   };
 
   return (
@@ -35,15 +39,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           className="rounded-t-lg w-full h-40 object-cover"
           loading="lazy"
         />
-        {/* Video button overlay top-right */}
-        <button
-          onClick={handlePlayClick}
-          className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 rounded-full p-1 shadow focus:outline-none focus:ring-2 focus:ring-primary z-10 transition"
-          type="button"
-          aria-label="Play project video"
-        >
-          <Play className="w-6 h-6 text-white" />
-        </button>
+        {/* Show video button if videoUrl is available */}
+        {project.videoUrl && (
+          <>
+            <button
+              onClick={handlePlayClick}
+              className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 rounded-full p-1 shadow focus:outline-none focus:ring-2 focus:ring-primary z-10 transition"
+              type="button"
+              aria-label="Play project video"
+            >
+              <Play className="w-6 h-6 text-white" />
+            </button>
+            <ProjectVideoDialog
+              videoUrl={project.videoUrl}
+              open={dialogOpen}
+              onOpenChange={setDialogOpen}
+              projectName={project.name}
+            />
+          </>
+        )}
       </div>
       <CardHeader>
         <CardTitle className="font-playfair text-xl">{project.name}</CardTitle>
