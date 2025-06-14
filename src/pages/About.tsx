@@ -158,7 +158,7 @@ const About = () => (
             "MLOps & scalability",
             "Effective Teamwork",
           ]}
-          workAt={[
+          workOn={[
             "Startup XYZ (ML Intern)",
             "Student Research Clubs",
             "Hackathons & Open Source",

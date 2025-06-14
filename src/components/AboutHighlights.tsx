@@ -4,7 +4,7 @@ import React from "react";
 interface AboutHighlightsProps {
   goodAt: string[];
   interestedAt: string[];
-  workAt: string[];
+  workOn: string[];
 }
 
 const sectionClasses =
@@ -13,7 +13,7 @@ const sectionClasses =
 const AboutHighlights: React.FC<AboutHighlightsProps> = ({
   goodAt,
   interestedAt,
-  workAt,
+  workOn,
 }) => (
   <div className="flex flex-col md:flex-row md:items-start gap-4 mb-10 animate-fade-in">
     <div className={sectionClasses}>
@@ -38,10 +38,10 @@ const AboutHighlights: React.FC<AboutHighlightsProps> = ({
     </div>
     <div className={sectionClasses}>
       <h3 className="font-semibold text-primary text-lg font-playfair mb-2">
-        I work at
+        I work on
       </h3>
       <ul className="list-disc list-inside text-muted-foreground text-sm font-inter space-y-1">
-        {workAt.map((s, i) => (
+        {workOn.map((s, i) => (
           <li key={i}>{s}</li>
         ))}
       </ul>

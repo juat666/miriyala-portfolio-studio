@@ -5,9 +5,9 @@ You can easily add, edit, or remove Work Experience and Education items using Re
 
 ---
 
-## ✨ Add or Update "Highlights" Section (Good at, Interested at, Work at)
+## ✨ Add or Update "Highlights" Section (Good at, Interested at, Work on)
 
-You can personalize the top section of your About page (the “I am good at”, “I am interested at”, and “I work at” cards) by editing the `AboutHighlights` component props inside `src/pages/About.tsx`.
+You can personalize the top section of your About page (the “I am good at”, “I am interested at”, and “I work on” cards) by editing the `AboutHighlights` component props inside `src/pages/About.tsx`.
 
 1. Open `src/pages/About.tsx`.
 
@@ -26,7 +26,7 @@ You can personalize the top section of your About page (the “I am good at”, 
        "MLOps & scalability",
        "Effective Teamwork",
      ]}
-     workAt={[
+     workOn={[
        "Startup XYZ (ML Intern)",
        "Student Research Clubs",
        "Hackathons & Open Source",
@@ -35,7 +35,7 @@ You can personalize the top section of your About page (the “I am good at”, 
    ```
 
 3. **To edit highlight lists:**
-   - Change, add, or remove items in any of the `goodAt`, `interestedAt`, or `workAt` props.
+   - Change, add, or remove items in any of the `goodAt`, `interestedAt`, or `workOn` props.
    - You can use as many items as you like in each array, and the UI will update.
 
 4. **Save the file**—your changes will be visible immediately on the About page!
