@@ -19,7 +19,7 @@ const About = () => (
             className="w-28 h-28 rounded-full object-cover border-2 border-primary shadow-lg"
             loading="lazy"
           />
-          <h1 className="text-3xl md:text-4xl font-bold font-playfair text-primary">Kundhan Miriyala</h1>
+          <h1 className="text-3xl md:text-4xl font-bold font-playfair text-primary text-center">Kundhan Miriyala</h1>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-muted-foreground font-inter text-xs">
             <User className="w-4 h-4" /> AI Enthusiast & Problem Solver
           </span>
@@ -28,33 +28,39 @@ const About = () => (
         <div className="mb-6 text-center">
           <p className="text-lg font-inter mb-2 text-muted-foreground">
             Hello! I'm Kundhan, passionate about AI and creating accessible technology that makes a difference.
-            I enjoy solving real-world problems, learning new things, and sharing knowledge with the community.
+            Currently building foundations in artificial intelligence and agents, with a focus on reinforcement learning.
+            Always eager to explore, learn, and share knowledge.
           </p>
         </div>
-        {/* Details: Background, Skills, Hobbies */}
+        {/* Structured Details */}
         <div className="grid gap-6 md:grid-cols-3 text-left">
+          {/* Background */}
           <div>
             <h2 className="font-semibold text-primary mb-2 font-playfair text-lg">Background</h2>
-            <ul className="list-disc list-inside text-muted-foreground text-sm font-inter">
-              <li>B.Tech in Computer Science</li>
-              <li>3+ years building web and AI projects</li>
-              <li>Open Source Contributor</li>
+            <ul className="list-disc list-inside text-muted-foreground text-sm font-inter space-y-1">
+              <li>B.Tech majoring in AI and Data Science</li>
+              <li>Currently building foundations on AI and agents</li>
+              <li>Reinforcement learning</li>
             </ul>
           </div>
+          {/* Skills */}
           <div>
             <h2 className="font-semibold text-primary mb-2 font-playfair text-lg">Skills</h2>
-            <ul className="list-disc list-inside text-muted-foreground text-sm font-inter">
-              <li>Python, TypeScript, React</li>
-              <li>Machine Learning, Deep Learning</li>
-              <li>Web Development</li>
+            <ul className="list-disc list-inside text-muted-foreground text-sm font-inter space-y-1">
+              <li>Python</li>
+              <li>TypeScript</li>
+              <li>React</li>
+              <li>Machine Learning</li>
+              <li>Deep Learning</li>
             </ul>
           </div>
+          {/* Hobbies */}
           <div>
             <h2 className="font-semibold text-primary mb-2 font-playfair text-lg">Hobbies</h2>
-            <ul className="list-disc list-inside text-muted-foreground text-sm font-inter">
-              <li>Solving puzzles & logic games</li>
-              <li>Coffee brewing</li>
-              <li>Photography & nature walks</li>
+            <ul className="list-disc list-inside text-muted-foreground text-sm font-inter space-y-1">
+              <li>Watching movies</li>
+              <li>Playing chess</li>
+              <li>Having great food</li>
             </ul>
           </div>
         </div>
@@ -83,4 +89,3 @@ const About = () => (
 );
 
 export default About;
-
