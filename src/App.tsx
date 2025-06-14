@@ -17,6 +17,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/about" element={<(await import('./pages/About')).default />} />
+          <Route path="/projects" element={<(await import('./pages/Projects')).default />} />
+          <Route path="/blog" element={<(await import('./pages/Blog')).default />} />
+          <Route path="/contact" element={<(await import('./pages/Contact')).default />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
