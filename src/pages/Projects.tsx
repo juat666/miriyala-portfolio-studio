@@ -156,9 +156,9 @@ const INITIAL_DISPLAY_COUNT = 6;
 const LOAD_MORE_COUNT = 6;
 
 const Projects = () => {
-  const [selectedTech, setSelectedTech] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<"desc" | "asc">("desc");
-  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
+  const [selectedTech, setSelectedTech] = React.useState<string | null>(null);
+  const [sortDirection, setSortDirection] = React.useState<"desc" | "asc">("desc");
+  const [displayCount, setDisplayCount] = React.useState(INITIAL_DISPLAY_COUNT);
 
   // Filter and sort logic
   let filteredProjects = selectedTech
@@ -179,6 +179,12 @@ const Projects = () => {
   React.useEffect(() => {
     setDisplayCount(INITIAL_DISPLAY_COUNT);
   }, [selectedTech, sortDirection]);
+
+  // Helper for load more button label
+  function getLoadMoreLabel() {
+    if (!selectedTech) return "Load More";
+    return `Load More ${selectedTech} Projects`;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -305,7 +311,7 @@ const Projects = () => {
                 className="bg-primary text-primary-foreground font-medium rounded px-7 py-2 transition hover:bg-primary/80"
                 onClick={() => setDisplayCount((prev) => prev + LOAD_MORE_COUNT)}
               >
-                Load More
+                {getLoadMoreLabel()}
               </button>
             </div>
           )}
