@@ -11,6 +11,7 @@ import {
   SelectContent, 
   SelectItem 
 } from "@/components/ui/select";
+import ProjectCard from "@/components/ProjectCard";
 
 // Sample project data (replace or extend as needed)
 const projects = [
@@ -219,61 +220,7 @@ const Projects = () => {
           {/* Projects Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {displayedProjects.map((proj) => (
-              <Card
-                key={proj.name}
-                className="transition-shadow hover:shadow-lg bg-card animate-fade-in flex flex-col h-full"
-              >
-                <img
-                  src={proj.image}
-                  alt={proj.name}
-                  className="rounded-t-lg w-full h-40 object-cover"
-                  loading="lazy"
-                />
-                <CardHeader>
-                  <CardTitle className="font-playfair text-xl">{proj.name}</CardTitle>
-                  <CardDescription>{proj.year}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col">
-                  <p className="mb-3 text-sm font-inter text-muted-foreground">{proj.description}</p>
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {proj.techStack.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="secondary"
-                        className="font-inter text-xs"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-3 mt-auto">
-                    {proj.github && (
-                      <a
-                        href={proj.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="View on GitHub"
-                        className="hover:underline flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span className="font-inter text-xs">GitHub</span>
-                      </a>
-                    )}
-                    {proj.live && (
-                      <a
-                        href={proj.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="View Live Project"
-                        className="hover:underline flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        <span className="material-icons w-4 h-4" aria-hidden="true">🔗</span>
-                        <span className="font-inter text-xs">Live</span>
-                      </a>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+              <ProjectCard key={proj.name} project={proj} />
             ))}
           </div>
           {/* No Projects Case */}
