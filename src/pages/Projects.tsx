@@ -1,22 +1,159 @@
 
 import Navbar from "@/components/Navbar";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Github } from "lucide-react";
+import { useState } from "react";
 
-const Projects = () => (
-  <div className="min-h-screen flex flex-col bg-background">
-    <Navbar />
-    <main className="flex-1 flex items-center justify-center px-4 py-12">
-      <section className="max-w-3xl w-full mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-2 text-primary text-center">Projects</h1>
-        <p className="text-lg text-muted-foreground mb-4 text-center font-inter">
-          Here you'll find a collection of my recent work, including AI projects, open-source tools, and more. Explore the project highlights and detailed case studies coming soon!
-        </p>
-        {/* Placeholder for project cards/list */}
-        <div className="mt-8 text-center">
-          <span className="text-accent-foreground font-inter">More detailed project showcase in progress...</span>
-        </div>
-      </section>
-    </main>
-  </div>
+// Sample project data (replace or extend as needed)
+const projects = [
+  {
+    name: "Smart Agent",
+    description:
+      "A reinforcement learning agent that learns to play chess and improves over time using advanced AI algorithms.",
+    techStack: ["Python", "PyTorch", "RL"],
+    year: 2024,
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
+    github: "https://github.com/example/smart-agent",
+    live: "",
+  },
+  {
+    name: "AI Notes",
+    description:
+      "A powerful note-taking web app that leverages GPT for intelligent search and organization.",
+    techStack: ["React", "TypeScript", "OpenAI API"],
+    year: 2023,
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
+    github: "https://github.com/example/ai-notes",
+    live: "https://ai-notes.example.com",
+  },
+  {
+    name: "ML Visualizer",
+    description:
+      "Tool for visualizing neural networks and training processes in an interactive dashboard.",
+    techStack: ["Python", "Streamlit", "ML"],
+    year: 2022,
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+    github: "https://github.com/example/ml-visualizer",
+    live: "",
+  },
+];
+
+// Collect all unique techs for filtering
+const allTechs = Array.from(
+  new Set(projects.flatMap((p) => p.techStack)),
 );
+
+const Projects = () => {
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+
+  // Filter projects by selected tech
+  const filteredProjects = selectedTech
+    ? projects.filter((p) => p.techStack.includes(selectedTech))
+    : projects;
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <Navbar />
+      <main className="flex-1 flex flex-col items-center px-4 py-12">
+        <section className="max-w-5xl w-full mx-auto animate-fade-in">
+          <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-2 text-primary text-center">
+            Projects
+          </h1>
+          <p className="text-lg text-muted-foreground mb-6 text-center font-inter">
+            Discover a selection of my recent work—from AI and ML tools to open-source web apps.<br />
+            Filter by technology and explore the highlights below!
+          </p>
+          {/* Filter Bar */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <Badge
+              variant={selectedTech === null ? "default" : "outline"}
+              onClick={() => setSelectedTech(null)}
+              className="cursor-pointer"
+            >
+              All
+            </Badge>
+            {allTechs.map((tech) => (
+              <Badge
+                key={tech}
+                variant={selectedTech === tech ? "default" : "outline"}
+                onClick={() => setSelectedTech(tech)}
+                className="cursor-pointer"
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
+          {/* Projects Grid */}
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredProjects.map((proj) => (
+              <Card
+                key={proj.name}
+                className="transition-shadow hover:shadow-lg bg-card animate-fade-in flex flex-col h-full"
+              >
+                <img
+                  src={proj.image}
+                  alt={proj.name}
+                  className="rounded-t-lg w-full h-40 object-cover"
+                  loading="lazy"
+                />
+                <CardHeader>
+                  <CardTitle className="font-playfair text-xl">{proj.name}</CardTitle>
+                  <CardDescription>{proj.year}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1 flex flex-col">
+                  <p className="mb-3 text-sm font-inter text-muted-foreground">{proj.description}</p>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {proj.techStack.map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="secondary"
+                        className="font-inter text-xs"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex gap-3 mt-auto">
+                    {proj.github && (
+                      <a
+                        href={proj.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View on GitHub"
+                        className="hover:underline flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        <Github className="w-4 h-4" />
+                        <span className="font-inter text-xs">GitHub</span>
+                      </a>
+                    )}
+                    {proj.live && (
+                      <a
+                        href={proj.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View Live Project"
+                        className="hover:underline flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        <span className="material-icons w-4 h-4" aria-hidden="true">🔗</span>
+                        <span className="font-inter text-xs">Live</span>
+                      </a>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          {/* No Projects Case */}
+          {filteredProjects.length === 0 && (
+            <div className="text-center text-muted-foreground font-inter mt-12 animate-fade-in">
+              No projects found for <span className="font-semibold">{selectedTech}</span>
+            </div>
+          )}
+        </section>
+      </main>
+    </div>
+  );
+};
 
 export default Projects;
