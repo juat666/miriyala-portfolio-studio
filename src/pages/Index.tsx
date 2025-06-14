@@ -28,11 +28,24 @@ const Index = () => {
             <h1 className="text-4xl md:text-5xl font-playfair font-bold leading-tight mb-4">
               Kundhan Miriyala
             </h1>
-            <h2 className="text-2xl md:text-3xl font-inter text-primary mb-2">
-              Full Stack Developer & Designer
+            <h2 className="text-2xl md:text-3xl font-inter text-primary mb-2 font-semibold">
+              Innovative Software Engineer & Aspiring Entrepreneur
             </h2>
+            <p className="text-base md:text-lg text-muted-foreground font-inter mb-2 font-medium">
+              AI Enthusiast&nbsp;&bull;&nbsp;Tech Problem Solver&nbsp;&bull;&nbsp;Community Builder
+            </p>
+            <ul className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start text-sm md:text-base">
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">React</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">TypeScript</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">Node.js</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">Python</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">UI/UX Design</li>
+              <li className="bg-accent text-accent-foreground rounded px-3 py-1 font-inter">LangChain</li>
+            </ul>
             <p className="text-lg md:text-xl text-muted-foreground font-inter mb-6 max-w-xl">
-              I build beautiful, performant digital experiences with a focus on simplicity, accessibility, and craft. Let’s create something amazing together!
+              Empowering the next generation of tech talent by building robust digital experiences and sharing solutions.  
+              <br className="hidden md:block" />
+              For potential employers, collaborators, investors, and newcomers—let’s innovate together!
             </p>
             <div className="flex gap-4">
               <Link to="/projects" tabIndex={-1}>
