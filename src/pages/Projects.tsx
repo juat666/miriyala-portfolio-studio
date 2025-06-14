@@ -1,9 +1,15 @@
-
 import Navbar from "@/components/Navbar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Github } from "lucide-react";
 import { useState } from "react";
+import { 
+  Select, 
+  SelectTrigger, 
+  SelectValue, 
+  SelectContent, 
+  SelectItem 
+} from "@/components/ui/select";
 
 // Sample project data (replace or extend as needed)
 const projects = [
@@ -44,13 +50,41 @@ const allTechs = Array.from(
   new Set(projects.flatMap((p) => p.techStack)),
 );
 
+// Defaults and allowed size options
+const DEFAULT_SHOW_COUNT = 3;
+const PAGE_SIZE_OPTIONS = [3, 6, 9, "All"];
+
 const Projects = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [sortDirection, setSortDirection] = useState<"desc" | "asc">("desc"); // desc: recent first, asc: oldest first
+  const [projectsToShow, setProjectsToShow] = useState<number | "All">(DEFAULT_SHOW_COUNT);
 
   // Filter projects by selected tech
-  const filteredProjects = selectedTech
+  let filteredProjects = selectedTech
     ? projects.filter((p) => p.techStack.includes(selectedTech))
     : projects;
+
+  // Sort projects by year
+  filteredProjects = [...filteredProjects].sort((a, b) =>
+    sortDirection === "desc" ? b.year - a.year : a.year - b.year
+  );
+
+  // Slice projects to show according to selected count
+  const canShowCountSelector = filteredProjects.length > DEFAULT_SHOW_COUNT;
+  let displayedProjects =
+    projectsToShow === "All"
+      ? filteredProjects
+      : filteredProjects.slice(0, projectsToShow);
+
+  // Count selector options (dynamic)
+  const pageSizeOptions = PAGE_SIZE_OPTIONS.filter(
+    (option) =>
+      option === "All" ||
+      (typeof option === "number" && option < filteredProjects.length)
+  );
+  if (!pageSizeOptions.includes(filteredProjects.length) && filteredProjects.length > DEFAULT_SHOW_COUNT) {
+    pageSizeOptions.push(filteredProjects.length);
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -64,29 +98,84 @@ const Projects = () => {
             Discover a selection of my recent work—from AI and ML tools to open-source web apps.<br />
             Filter by technology and explore the highlights below!
           </p>
-          {/* Filter Bar */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            <Badge
-              variant={selectedTech === null ? "default" : "outline"}
-              onClick={() => setSelectedTech(null)}
-              className="cursor-pointer"
-            >
-              All
-            </Badge>
-            {allTechs.map((tech) => (
+          {/* Filter + Sort + Count Bar */}
+          <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
+            {/* Filter Bar */}
+            <div className="flex flex-wrap gap-2">
               <Badge
-                key={tech}
-                variant={selectedTech === tech ? "default" : "outline"}
-                onClick={() => setSelectedTech(tech)}
+                variant={selectedTech === null ? "default" : "outline"}
+                onClick={() => setSelectedTech(null)}
                 className="cursor-pointer"
               >
-                {tech}
+                All
               </Badge>
-            ))}
+              {allTechs.map((tech) => (
+                <Badge
+                  key={tech}
+                  variant={selectedTech === tech ? "default" : "outline"}
+                  onClick={() => setSelectedTech(tech)}
+                  className="cursor-pointer"
+                >
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+            {/* Sort */}
+            <div>
+              <Select
+                value={sortDirection}
+                onValueChange={(v) => setSortDirection(v as "desc" | "asc")}
+              >
+                <SelectTrigger className="w-36">
+                  <SelectValue>
+                    Sort: {sortDirection === "desc" ? "Most Recent" : "Oldest"}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="desc">Most Recent</SelectItem>
+                  <SelectItem value="asc">Oldest</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {/* Count Selector */}
+            {canShowCountSelector && (
+              <div>
+                <Select
+                  value={String(projectsToShow)}
+                  onValueChange={(v) =>
+                    setProjectsToShow(
+                      v === "All" ? "All" : Number(v)
+                    )
+                  }
+                >
+                  <SelectTrigger className="w-32">
+                    <SelectValue>
+                      Show:{" "}
+                      {projectsToShow === "All"
+                        ? "All"
+                        : projectsToShow}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {pageSizeOptions.map((option) =>
+                      option === "All" ? (
+                        <SelectItem key="all" value="All">
+                          All
+                        </SelectItem>
+                      ) : (
+                        <SelectItem key={option} value={String(option)}>
+                          {option}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
           {/* Projects Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProjects.map((proj) => (
+            {displayedProjects.map((proj) => (
               <Card
                 key={proj.name}
                 className="transition-shadow hover:shadow-lg bg-card animate-fade-in flex flex-col h-full"
@@ -145,7 +234,7 @@ const Projects = () => {
             ))}
           </div>
           {/* No Projects Case */}
-          {filteredProjects.length === 0 && (
+          {displayedProjects.length === 0 && (
             <div className="text-center text-muted-foreground font-inter mt-12 animate-fade-in">
               No projects found for <span className="font-semibold">{selectedTech}</span>
             </div>
