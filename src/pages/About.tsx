@@ -5,9 +5,10 @@ import { Download, User, Github, Linkedin } from "lucide-react";
 import React from "react";
 import WorkExperienceSection from "@/components/WorkExperienceSection";
 import EducationSection from "@/components/EducationSection";
+import type { TimelineItem } from "@/components/ExperienceTimeline";
 
 // Work experience data (each will be one ExperienceTimeline item)
-const workExperience = [
+const workExperience: TimelineItem[] = [
   {
     title: "Machine Learning Intern",
     org: "Startup XYZ",
@@ -43,7 +44,7 @@ const workExperience = [
 ];
 
 // Education data (each will be one ExperienceTimeline item)
-const education = [
+const education: TimelineItem[] = [
   {
     title: "B.Tech in AI & Data Science",
     org: "Your University",
