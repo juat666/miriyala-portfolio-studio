@@ -1,3 +1,4 @@
+import React from "react";
 import Navbar from "@/components/Navbar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -39,7 +40,7 @@ const projects = [
       "Tool for visualizing neural networks and training processes in an interactive dashboard.",
     techStack: ["Python", "Streamlit", "ML"],
     year: 2022,
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1488590528505-0ad4aaf24ca7?auto=format&fit=crop&w=600&q=80",
     github: "https://github.com/example/ml-visualizer",
     live: "",
   },
