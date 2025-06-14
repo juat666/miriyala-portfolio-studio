@@ -1,4 +1,3 @@
-
 import React from "react";
 
 interface AboutHighlightsProps {
@@ -57,7 +56,7 @@ const sectionClasses =
   "flex-1 min-w-[210px] px-6 py-6 rounded-2xl bg-card border border-muted flex flex-col items-center gap-3 shadow-md transition-transform hover:scale-105 duration-150";
 
 const listClasses =
-  "list-disc list-inside text-muted-foreground text-sm font-inter space-y-1 text-center";
+  "list-disc list-inside text-muted-foreground text-sm font-inter space-y-1 text-left";
 
 const AboutHighlights: React.FC<AboutHighlightsProps> = ({
   goodAt,
@@ -87,4 +86,3 @@ const AboutHighlights: React.FC<AboutHighlightsProps> = ({
 };
 
 export default AboutHighlights;
-
