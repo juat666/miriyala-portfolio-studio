@@ -51,8 +51,8 @@ const allTechs = Array.from(
 );
 
 // Defaults and allowed size options
-const DEFAULT_SHOW_COUNT = 3;
-const PAGE_SIZE_OPTIONS = [3, 6, 9, "All"];
+const DEFAULT_SHOW_COUNT = 9;
+const PAGE_SIZE_BASES = [3, 6, 9];
 
 const Projects = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
@@ -71,19 +71,23 @@ const Projects = () => {
 
   // Slice projects to show according to selected count
   const canShowCountSelector = filteredProjects.length > DEFAULT_SHOW_COUNT;
+
   let displayedProjects =
     projectsToShow === "All"
       ? filteredProjects
       : filteredProjects.slice(0, projectsToShow);
 
-  // Count selector options (dynamic)
-  const pageSizeOptions = PAGE_SIZE_OPTIONS.filter(
-    (option) =>
-      option === "All" ||
-      (typeof option === "number" && option < filteredProjects.length)
-  );
-  if (!pageSizeOptions.includes(filteredProjects.length) && filteredProjects.length > DEFAULT_SHOW_COUNT) {
-    pageSizeOptions.push(filteredProjects.length);
+  // Dynamic page size options (show: 3, 6, 9, and total/all)
+  let pageSizeOptions: (number | "All")[] = [];
+  if (canShowCountSelector) {
+    pageSizeOptions = PAGE_SIZE_BASES.filter(
+      (base) => base < filteredProjects.length
+    );
+    // Always include "All"
+    if (!pageSizeOptions.includes(filteredProjects.length)) {
+      pageSizeOptions.push(filteredProjects.length);
+    }
+    pageSizeOptions = Array.from(new Set([...pageSizeOptions, "All"])); // avoid duplicates
   }
 
   return (
@@ -144,7 +148,9 @@ const Projects = () => {
                   value={String(projectsToShow)}
                   onValueChange={(v) =>
                     setProjectsToShow(
-                      v === "All" ? "All" : Number(v)
+                      v === "All"
+                        ? "All"
+                        : Number(v)
                     )
                   }
                 >
