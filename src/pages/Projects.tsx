@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -152,44 +151,33 @@ const allTechs = Array.from(
 );
 
 // Defaults and allowed size options
-const DEFAULT_SHOW_COUNT = 9;
-const PAGE_SIZE_BASES = [3, 6, 9];
+const INITIAL_DISPLAY_COUNT = 6;
+const LOAD_MORE_COUNT = 6;
 
 const Projects = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<"desc" | "asc">("desc"); // desc: recent first, asc: oldest first
-  const [projectsToShow, setProjectsToShow] = useState<number | "All">(DEFAULT_SHOW_COUNT);
+  const [sortDirection, setSortDirection] = useState<"desc" | "asc">("desc");
+  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
-  // Filter projects by selected tech
+  // Filter and sort logic
   let filteredProjects = selectedTech
     ? projects.filter((p) => p.techStack.includes(selectedTech))
     : projects;
 
-  // Sort projects by year
   filteredProjects = [...filteredProjects].sort((a, b) =>
     sortDirection === "desc" ? b.year - a.year : a.year - b.year
   );
 
-  // Slice projects to show according to selected count
-  const canShowCountSelector = filteredProjects.length > DEFAULT_SHOW_COUNT;
+  // Slice projects for display
+  const displayedProjects = filteredProjects.slice(0, displayCount);
 
-  let displayedProjects =
-    projectsToShow === "All"
-      ? filteredProjects
-      : filteredProjects.slice(0, projectsToShow);
+  // Show "Load More" if not all projects are being displayed
+  const canLoadMore = displayCount < filteredProjects.length;
 
-  // Dynamic page size options (show: 3, 6, 9, and total/all)
-  let pageSizeOptions: (number | "All")[] = [];
-  if (canShowCountSelector) {
-    pageSizeOptions = PAGE_SIZE_BASES.filter(
-      (base) => base < filteredProjects.length
-    );
-    // Always include "All"
-    if (!pageSizeOptions.includes(filteredProjects.length)) {
-      pageSizeOptions.push(filteredProjects.length);
-    }
-    pageSizeOptions = Array.from(new Set([...pageSizeOptions, "All"])); // avoid duplicates
-  }
+  // Reset the visible projects when the filter or sort changes
+  React.useEffect(() => {
+    setDisplayCount(INITIAL_DISPLAY_COUNT);
+  }, [selectedTech, sortDirection]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -203,7 +191,7 @@ const Projects = () => {
             Discover a selection of my recent work—from AI and ML tools to open-source web apps.<br />
             Filter by technology and explore the highlights below!
           </p>
-          {/* Filter + Sort + Count Bar */}
+          {/* Filter + Sort Bar */}
           <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
             {/* Filter Bar */}
             <div className="flex flex-wrap gap-2">
@@ -242,43 +230,6 @@ const Projects = () => {
                 </SelectContent>
               </Select>
             </div>
-            {/* Count Selector */}
-            {canShowCountSelector && (
-              <div>
-                <Select
-                  value={String(projectsToShow)}
-                  onValueChange={(v) =>
-                    setProjectsToShow(
-                      v === "All"
-                        ? "All"
-                        : Number(v)
-                    )
-                  }
-                >
-                  <SelectTrigger className="w-32">
-                    <SelectValue>
-                      Show:{" "}
-                      {projectsToShow === "All"
-                        ? "All"
-                        : projectsToShow}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    {pageSizeOptions.map((option) =>
-                      option === "All" ? (
-                        <SelectItem key="all" value="All">
-                          All
-                        </SelectItem>
-                      ) : (
-                        <SelectItem key={option} value={String(option)}>
-                          {option}
-                        </SelectItem>
-                      )
-                    )}
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
           </div>
           {/* Projects Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -346,6 +297,17 @@ const Projects = () => {
               No projects found for <span className="font-semibold">{selectedTech}</span>
             </div>
           )}
+          {/* Load More Button */}
+          {canLoadMore && (
+            <div className="flex justify-center mt-8">
+              <button
+                className="bg-primary text-primary-foreground font-medium rounded px-7 py-2 transition hover:bg-primary/80"
+                onClick={() => setDisplayCount((prev) => prev + LOAD_MORE_COUNT)}
+              >
+                Load More
+              </button>
+            </div>
+          )}
         </section>
       </main>
     </div>
@@ -353,4 +315,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
