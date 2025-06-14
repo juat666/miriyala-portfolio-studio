@@ -46,7 +46,8 @@ const ThemeToggle: React.FC = () => {
       pressed={isDark}
       aria-label="Toggle dark mode"
       onClick={handleToggle}
-      className="fixed top-4 right-4 z-50 border-muted-foreground/20 bg-background hover:bg-muted"
+      // Remove fixed positioning, make inline with nav
+      className="border-muted-foreground/20 bg-background hover:bg-muted"
     >
       {isDark ? (
         <ToggleRight className="text-yellow-400" />

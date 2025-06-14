@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -32,7 +33,7 @@ const Navbar = () => {
           Kundhan Miriyala
         </Link>
         {/* Desktop Nav */}
-        <div className="hidden md:flex gap-5">
+        <div className="hidden md:flex gap-5 items-center">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -52,6 +53,10 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
+          {/* Add Theme Toggle next to nav links, margin to separate */}
+          <div className="ml-6">
+            <ThemeToggle />
+          </div>
         </div>
         {/* Mobile Burger */}
         <button
@@ -65,6 +70,10 @@ const Navbar = () => {
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="md:hidden bg-background border-b border-border px-4 py-2 pb-4 animate-fade-in absolute w-full left-0 top-16 z-30 shadow-lg">
+          {/* Place ThemeToggle at top of mobile menu */}
+          <div className="w-full flex justify-end mb-2">
+            <ThemeToggle />
+          </div>
           <div className="flex flex-col gap-2 items-start">
             {navItems.map((item) => (
               <Link
@@ -101,4 +110,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

@@ -6,7 +6,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <ThemeToggle />
+      {/* Moved ThemeToggle into Navbar */}
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
         {/* Gradient background */}
