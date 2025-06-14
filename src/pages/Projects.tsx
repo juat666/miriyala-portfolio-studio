@@ -173,21 +173,19 @@ const Projects = () => {
             setSelectedTech={setSelectedTech}
             setSortDirection={setSortDirection}
           />
-          {/* Stack count info message with option */}
-          {allTechs.length > 10 && (
-            <div className="mb-6 px-4 py-2 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded font-inter text-sm flex items-center justify-between gap-4">
-              <span>Too many tech stacks? Try narrowing your filter for a better experience.</span>
-              {selectedTech && (
-                <button
-                  className="ml-4 bg-yellow-200 hover:bg-yellow-300 text-yellow-900 px-3 py-1 rounded text-xs font-semibold transition"
-                  onClick={() => setSelectedTech(null)}
-                  type="button"
-                >
-                  Clear Filters
-                </button>
-              )}
-            </div>
-          )}
+          {/* Stack count info message always visible now */}
+          <div className="mb-6 px-4 py-2 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded font-inter text-sm flex items-center justify-between gap-4">
+            <span>Too many tech stacks? Try narrowing your filter for a better experience.</span>
+            {selectedTech && (
+              <button
+                className="ml-4 bg-yellow-200 hover:bg-yellow-300 text-yellow-900 px-3 py-1 rounded text-xs font-semibold transition"
+                onClick={() => setSelectedTech(null)}
+                type="button"
+              >
+                Clear Filters
+              </button>
+            )}
+          </div>
           {/* Projects Grid */}
           <ProjectGrid projects={displayedProjects} />
           {/* No Projects Case */}
