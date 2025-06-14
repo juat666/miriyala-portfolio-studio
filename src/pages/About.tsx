@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Download, User, Github, Linkedin } from "lucide-react";
 import React from "react";
-import ExperienceTimeline from "@/components/ExperienceTimeline";
+import ExperienceTimeline, { ExperienceTimelineProps } from "@/components/ExperienceTimeline";
 
 // Social links: add socials as needed
 const socials = [
@@ -18,8 +18,8 @@ const socials = [
   },
 ];
 
-// Separate data for work and education
-const workExperience = [
+// Explicitly type as TimelineItem[] for both arrays
+const workExperience: ExperienceTimelineProps["items"] = [
   {
     id: "exp1",
     type: "work",
@@ -54,7 +54,7 @@ const workExperience = [
   },
 ];
 
-const education = [
+const education: ExperienceTimelineProps["items"] = [
   {
     id: "edu1",
     type: "education",
