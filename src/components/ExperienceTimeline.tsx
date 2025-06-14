@@ -1,9 +1,9 @@
-
 import React, { useState } from "react";
 import { Briefcase, GraduationCap, MapPin, Calendar, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type TimelineItem = {
+// Export the TimelineItem type so it can be imported elsewhere
+export type TimelineItem = {
   id: string;
   title: string;
   org: string;
