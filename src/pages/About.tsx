@@ -1,10 +1,46 @@
 
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { Download, User } from "lucide-react";
+import { Download, User, Github, Linkedin } from "lucide-react";
+import React from "react";
 
 const profilePic =
   "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=facearea&w=320&h=320&facepad=3";
+
+// Social links: add socials as needed
+const socials = [
+  {
+    name: "GitHub",
+    url: "https://github.com/kundhanmiriyala",
+    icon: Github,
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/kundhanmiriyala",
+    icon: Linkedin,
+  },
+];
+
+const workTimeline = [
+  {
+    title: "Machine Learning Intern",
+    org: "Startup XYZ",
+    period: "May 2024 – Jul 2024",
+    desc: "Worked on developing reinforcement learning agents for real-world scenarios."
+  },
+  {
+    title: "AI & Data Science Student",
+    org: "Your University",
+    period: "2022 – Present",
+    desc: "Majoring in AI and Data Science with projects ranging from ML to deep learning."
+  }
+];
+
+const achievements = [
+  "Google AI Scholarship Recipient (2023)",
+  "Won HackAI 2024 (Best Use of AI award)",
+  "TensorFlow Developer Certificate (2024)"
+];
 
 const About = () => (
   <div className="min-h-screen flex flex-col bg-background">
@@ -23,6 +59,21 @@ const About = () => (
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-muted-foreground font-inter text-xs">
             <User className="w-4 h-4" /> AI Enthusiast & Problem Solver
           </span>
+          {/* Social Links */}
+          <div className="flex gap-4 mt-1">
+            {socials.map(({ name, url, icon: Icon }) => (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                className="hover:text-primary/90 text-muted-foreground transition-colors"
+              >
+                <Icon className="w-6 h-6" />
+              </a>
+            ))}
+          </div>
         </div>
         {/* Short Bio */}
         <div className="mb-6 text-center">
@@ -64,6 +115,31 @@ const About = () => (
             </ul>
           </div>
         </div>
+        {/* Timeline: Work Experience & Education */}
+        <div className="mt-10">
+          <h2 className="font-bold text-primary mb-4 font-playfair text-xl text-center md:text-left">Work Experience & Education</h2>
+          <ol className="relative border-l-2 border-primary/20 pl-6 space-y-6 font-inter">
+            {workTimeline.map(({ title, org, period, desc }, idx) => (
+              <li key={idx} className="ml-2">
+                <div className="absolute -left-3.5 mt-2 w-3 h-3 bg-primary rounded-full border-2 border-background"></div>
+                <div>
+                  <span className="font-semibold text-primary">{title}</span>
+                  <span className="block text-xs text-muted-foreground">{org} • {period}</span>
+                  <span className="block text-sm mt-1 text-muted-foreground">{desc}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+        {/* Achievements / Certifications */}
+        <div className="mt-10">
+          <h2 className="font-bold text-primary mb-4 font-playfair text-xl text-center md:text-left">Achievements & Certifications</h2>
+          <ul className="list-disc list-inside text-muted-foreground text-sm font-inter space-y-1">
+            {achievements.map((ach, idx) => (
+              <li key={idx}>{ach}</li>
+            ))}
+          </ul>
+        </div>
         {/* Download CV Button */}
         <div className="mt-8 flex justify-center">
           <Button
@@ -89,3 +165,4 @@ const About = () => (
 );
 
 export default About;
+
