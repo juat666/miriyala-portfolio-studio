@@ -12,6 +12,9 @@ import {
   SelectItem 
 } from "@/components/ui/select";
 import ProjectCard from "@/components/ProjectCard";
+import ProjectFilterBar from "@/components/ProjectFilterBar";
+import ProjectGrid from "@/components/ProjectGrid";
+import LoadMoreButton from "@/components/LoadMoreButton";
 
 // Sample project data (replace or extend as needed)
 const projects = [
@@ -163,45 +166,13 @@ const Projects = () => {
             Filter by technology and explore the highlights below!
           </p>
           {/* Filter + Sort Bar */}
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
-            {/* Filter Bar */}
-            <div className="flex flex-wrap gap-2">
-              <Badge
-                variant={selectedTech === null ? "default" : "outline"}
-                onClick={() => setSelectedTech(null)}
-                className="cursor-pointer"
-              >
-                All
-              </Badge>
-              {allTechs.map((tech) => (
-                <Badge
-                  key={tech}
-                  variant={selectedTech === tech ? "default" : "outline"}
-                  onClick={() => setSelectedTech(tech)}
-                  className="cursor-pointer"
-                >
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-            {/* Sort Control */}
-            <div className="flex-shrink-0">
-              <Select
-                value={sortDirection}
-                onValueChange={(v) => setSortDirection(v as "desc" | "asc")}
-              >
-                <SelectTrigger className="w-36">
-                  <SelectValue>
-                    Sort: {sortDirection === "desc" ? "Most Recent" : "Oldest"}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="desc">Most Recent</SelectItem>
-                  <SelectItem value="asc">Oldest</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+          <ProjectFilterBar
+            allTechs={allTechs}
+            selectedTech={selectedTech}
+            sortDirection={sortDirection}
+            setSelectedTech={setSelectedTech}
+            setSortDirection={setSortDirection}
+          />
           {/* Stack count info message with option */}
           {allTechs.length > 10 && (
             <div className="mb-6 px-4 py-2 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded font-inter text-sm flex items-center justify-between gap-4">
@@ -218,11 +189,7 @@ const Projects = () => {
             </div>
           )}
           {/* Projects Grid */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {displayedProjects.map((proj) => (
-              <ProjectCard key={proj.name} project={proj} />
-            ))}
-          </div>
+          <ProjectGrid projects={displayedProjects} />
           {/* No Projects Case */}
           {displayedProjects.length === 0 && (
             <div className="text-center text-muted-foreground font-inter mt-12 animate-fade-in">
@@ -231,14 +198,7 @@ const Projects = () => {
           )}
           {/* Load More Button */}
           {canLoadMore && (
-            <div className="flex justify-center mt-8">
-              <button
-                className="bg-primary text-primary-foreground font-medium rounded px-7 py-2 transition hover:bg-primary/80"
-                onClick={() => setDisplayCount((prev) => prev + LOAD_MORE_COUNT)}
-              >
-                {getLoadMoreLabel()}
-              </button>
-            </div>
+            <LoadMoreButton onClick={() => setDisplayCount((prev) => prev + LOAD_MORE_COUNT)} label={getLoadMoreLabel()} />
           )}
         </section>
       </main>
