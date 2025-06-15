@@ -1,9 +1,13 @@
+
 import Navbar from "@/components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
+import React from "react";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Moved ThemeToggle into Navbar */}
@@ -103,6 +107,23 @@ const Index = () => {
             Let me know if you'd like help drafting one.
           </span>
         </section>
+
+        {/* === New Contact Call-To-Action Section Starts Here === */}
+        <section className="w-full mt-16 flex flex-col items-center px-4">
+          <div className="max-w-xl w-full bg-muted rounded-lg p-8 shadow flex flex-col items-center gap-4 text-center">
+            <h2 className="text-2xl font-bold font-playfair text-primary">
+              Interested in working together? Let's discuss your next project.
+            </h2>
+            <Button 
+              size="lg" 
+              className="mt-2 font-inter px-8 py-3 text-base"
+              onClick={() => navigate("/contact")}
+            >
+              Get In Touch
+            </Button>
+          </div>
+        </section>
+        {/* === New Contact Call-To-Action Section Ends Here === */}
       </main>
       <footer className="bg-muted/50 border-t border-border text-muted-foreground py-4 mt-8 text-sm text-center relative z-10 shadow-inner">
         &copy; {new Date().getFullYear()} Kundhan Miriyala · Built with AI, code, and curiosity.
