@@ -16,6 +16,8 @@ import ProjectFilterBar from "@/components/ProjectFilterBar";
 import ProjectGrid from "@/components/ProjectGrid";
 import LoadMoreButton from "@/components/LoadMoreButton";
 import ProjectDetailDialog from "@/components/ProjectDetailDialog";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 // Sample project data (replace or extend as needed)
 const projects = [
@@ -152,6 +154,7 @@ const Projects = () => {
   const [selectedTech, setSelectedTech] = React.useState<string | null>(null);
   const [sortDirection, setSortDirection] = React.useState<"desc" | "asc" | "featured">("desc");
   const [displayCount, setDisplayCount] = React.useState(INITIAL_DISPLAY_COUNT);
+  const navigate = useNavigate();
 
   // --- Add state for project modal ---
   const [detailOpen, setDetailOpen] = React.useState(false);
@@ -243,6 +246,24 @@ const Projects = () => {
             <LoadMoreButton onClick={() => setDisplayCount((prev) => prev + LOAD_MORE_COUNT)} label={getLoadMoreLabel()} />
           )}
         </section>
+
+        {/* === New Contact Call-To-Action Section Starts Here === */}
+        <section className="w-full mt-16 flex flex-col items-center px-4">
+          <div className="max-w-xl w-full bg-muted rounded-lg p-8 shadow flex flex-col items-center gap-4 text-center">
+            <h2 className="text-2xl font-bold font-playfair text-primary">
+              Interested in working together? Let's discuss your next project.
+            </h2>
+            <Button 
+              size="lg" 
+              className="mt-2 font-inter px-8 py-3 text-base"
+              onClick={() => navigate("/contact")}
+            >
+              Get In Touch
+            </Button>
+          </div>
+        </section>
+        {/* === New Contact Call-To-Action Section Ends Here === */}
+
         {/* Modal for project details */}
         <ProjectDetailDialog
           open={detailOpen}
