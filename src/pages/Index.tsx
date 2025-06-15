@@ -15,6 +15,7 @@ const blogs = [
     image: "https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80",
     date: "2024-06-10",
     url: "https://towardsdatascience.com/reinforcement-learning-demystified-1f686157d9f6",
+    featured: true, // FEATURED
   },
   {
     title: "GPT in Product Design: Real-World Uses",
@@ -24,6 +25,7 @@ const blogs = [
     image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
     date: "2024-05-28",
     url: "https://uxdesign.cc/how-gpt-3-is-redefining-product-design-b67f71c686f6",
+    featured: false,
   },
   {
     title: "From Hackathon to Launch: Lessons Learned",
@@ -33,6 +35,7 @@ const blogs = [
     image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
     date: "2024-04-13",
     url: "https://medium.com/swlh/launching-an-mvp-in-48-hours-3f8c1c3b80be",
+    featured: false,
   }
 ];
 
@@ -140,9 +143,9 @@ const Index = () => {
         </section>
         {/* Blog/Writing Teaser */}
         <section className="relative z-10 mt-14 w-full max-w-4xl mx-auto text-center mb-6">
-          <h3 className="text-xl md:text-2xl font-bold font-playfair mb-2 text-primary">✍️ Recent Blog Posts</h3>
+          <h3 className="text-xl md:text-2xl font-bold font-playfair mb-2 text-primary">✍️ Featured Blog Posts</h3>
           <p className="text-md md:text-lg font-inter text-muted-foreground mb-2">
-            Browse my latest articles on AI, coding, product design, and tech journeys.
+            Browse my featured articles on AI, coding, product design, and tech journeys.
           </p>
           <HomeBlogGrid blogs={blogs} />
           {/* See All Blogs button */}
