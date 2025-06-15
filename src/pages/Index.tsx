@@ -6,6 +6,7 @@ import React from "react";
 import HomeBlogGrid from "@/components/HomeBlogGrid";
 import { projects as allProjects, FEATURED_PROJECTS_INDICES } from "@/components/projects/projectData";
 import ProjectCard from "@/components/ProjectCard";
+import ContactCTA from "@/components/ContactCTA";
 
 // Blog data for use in homepage and blog page (should be centralized in real projects)
 const blogs = [
@@ -156,20 +157,7 @@ const Index = () => {
           </div>
         </section>
         {/* === New Contact Call-To-Action Section Starts Here === */}
-        <section className="w-full mt-16 flex flex-col items-center px-4">
-          <div className="max-w-xl w-full bg-muted rounded-lg p-8 shadow flex flex-col items-center gap-4 text-center">
-            <h2 className="text-2xl font-bold font-playfair text-primary">
-              Interested in working together? Let's discuss your next project.
-            </h2>
-            <Button 
-              size="lg" 
-              className="mt-2 font-inter px-8 py-3 text-base"
-              onClick={() => navigate("/contact")}
-            >
-              Get In Touch
-            </Button>
-          </div>
-        </section>
+        <ContactCTA />
         {/* === New Contact Call-To-Action Section Ends Here === */}
       </main>
       <footer className="bg-muted/50 border-t border-border text-muted-foreground py-4 mt-8 text-sm text-center relative z-10 shadow-inner">
