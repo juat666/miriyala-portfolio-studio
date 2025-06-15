@@ -1,8 +1,7 @@
-
 import Navbar from "@/components/Navbar";
 import BlogGrid from "@/components/BlogGrid";
 
-// Dummy blog data (replace/extend as needed)
+// Dummy blog data with real Medium links
 const blogs = [
   {
     title: "Understanding Reinforcement Learning",
@@ -10,7 +9,7 @@ const blogs = [
     tags: ["AI", "Reinforcement Learning", "Machine Learning"],
     image: "https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80",
     date: "2024-06-10",
-    url: "#",
+    url: "https://towardsdatascience.com/reinforcement-learning-demystified-1f686157d9f6",
   },
   {
     title: "GPT in Product Design: Real-World Uses",
@@ -18,7 +17,7 @@ const blogs = [
     tags: ["GPT", "Product Design", "OpenAI"],
     image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
     date: "2024-05-28",
-    url: "#",
+    url: "https://uxdesign.cc/how-gpt-3-is-redefining-product-design-b67f71c686f6",
   },
   {
     title: "From Hackathon to Launch: Lessons Learned",
@@ -26,7 +25,7 @@ const blogs = [
     tags: ["Startups", "Hackathon"],
     image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
     date: "2024-04-13",
-    url: "#",
+    url: "https://medium.com/swlh/launching-an-mvp-in-48-hours-3f8c1c3b80be",
   }
   // Add more blogs here!
 ];
