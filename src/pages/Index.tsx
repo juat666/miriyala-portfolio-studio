@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import React from "react";
 import HomeBlogGrid from "@/components/HomeBlogGrid";
+import { projects as allProjects, FEATURED_PROJECTS_INDICES } from "@/components/projects/projectData";
+import ProjectCard from "@/components/ProjectCard";
 
 // Blog data for use in homepage and blog page (should be centralized in real projects)
 const blogs = [
@@ -41,6 +43,11 @@ const blogs = [
 
 const Index = () => {
   const navigate = useNavigate();
+
+  // Find featured projects based on indices
+  const featuredProjects = FEATURED_PROJECTS_INDICES
+    .map((idx) => allProjects[idx])
+    .filter(Boolean);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -103,32 +110,21 @@ const Index = () => {
             </div>
           </div>
         </div>
-        {/* Featured Projects */}
+        {/* === Featured Projects Section - ONLY SHOW FEATURED === */}
         <section className="relative z-10 mt-12 w-full max-w-4xl mx-auto">
           <h3 className="text-2xl md:text-3xl font-bold font-playfair mb-4 text-primary">🌟 Featured Projects</h3>
           <div className="flex flex-col md:flex-row gap-6">
-            <div className="flex-1 bg-card rounded-lg shadow-md p-6 mb-2 md:mb-0">
-              <h4 className="text-lg md:text-xl font-semibold font-inter mb-1 flex items-center gap-2">
-                <span role="img" aria-label="lock">🔐</span> Hybrid Encryption Security App
-              </h4>
-              <p className="text-muted-foreground mb-3">
-                Built a Python-based security app using AES + RSA encryption with a frontend interface.
-              </p>
-              <Link to="/projects">
-                <Button size="sm" className="font-inter">View Project →</Button>
-              </Link>
-            </div>
-            <div className="flex-1 bg-card rounded-lg shadow-md p-6">
-              <h4 className="text-lg md:text-xl font-semibold font-inter mb-1 flex items-center gap-2">
-                <span role="img" aria-label="clapper">🎬</span> Subtitle Matcher CLI App
-              </h4>
-              <p className="text-muted-foreground mb-3">
-                Smart tool that finds accurate subtitles for any MP4 file using web scraping and hashing techniques.
-              </p>
-              <Link to="/projects">
-                <Button size="sm" className="font-inter">View Project →</Button>
-              </Link>
-            </div>
+            {featuredProjects.length === 0 ? (
+              <div className="w-full text-muted-foreground font-inter mt-6 text-center animate-fade-in">
+                No featured projects yet.
+              </div>
+            ) : (
+              featuredProjects.map((proj) => (
+                <div key={proj.name} className="flex-1 min-w-0">
+                  <ProjectCard project={proj} />
+                </div>
+              ))
+            )}
           </div>
           {/* See All Projects button */}
           <div className="flex justify-center mt-6">
