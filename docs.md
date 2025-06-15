@@ -1,43 +1,50 @@
 
 # 📝 How to Update Your Portfolio Content (Beginner's Guide)
 
-Welcome! This guide will help **anyone** update, add, or remove content in your portfolio—including Projects, Work Experience, Education, Highlights, and Blogs—using simple steps. No coding experience needed!
+Welcome! This guide makes it super easy for **anyone** (no coding experience needed) to change the stuff on your portfolio website—projects, work experience, education, highlights, and blogs.
+
+---
+
+## 📂 Folder & File Structure
+
+Below is a simplified map of your project, showing which files you edit to update different sections:
+
+```
+src/
+│
+├── components/
+│   ├── projects/
+│   │   └── projectData.ts      # 👉 Edit for Projects list
+│   ├── blogData.ts            # 👉 Edit for Blog articles
+│   └── ... (other components)
+│
+├── pages/
+│   ├── About.tsx              # 👉 Edit for Highlights, Work Experience, Education
+│   └── ... (other pages)
+│
+└── ...
+docs.md                        # 👉 This help guide
+```
+
+- `projectData.ts` — All your Project entries.
+- `blogData.ts` — Blog article data (title, summary, etc).
+- `About.tsx` — Work experience, Education, and Highlights ("good at", "interested in", "work on" boxes).
+- `docs.md` — This guide!
 
 ---
 
 ## 🖥️ How to Add or Update Projects
 
-Projects are listed on the Projects page and showcased on the home page.
-
-**File to Edit:**  
+**File:**  
 `src/components/projects/projectData.ts`
 
-### ⭐ To **add a new project**:
-1. **Open** the file above.
-2. **Find** the `projects` array. Each project is an object (`{ }`) inside `[ ]` like this:
-   ```js
-   {
-     name: "Smart Agent",
-     description: "A reinforcement learning agent...",
-     techStack: ["Python", "PyTorch", "RL"],
-     year: 2024,
-     image: "https://...",
-     github: "https://...",
-     live: "https://...",
-     videoUrl: "https://...", // Optional
-   },
-   ```
-3. **Copy an existing project**, paste it below (inside the array), and change the fields to match your new project.
-    - **name** (required): The project title.
-    - **description** (required): Short about the project.
-    - **techStack** (required): Technologies (as array).
-    - **year** (required): Year completed.
-    - **image** (required): Image URL for cover.
-    - **github**: Link to code (optional).
-    - **live**: Link to live site (optional).
-    - **videoUrl**: Link to demo video (optional).
+Your projects appear on the "Projects" page and as featured on the home page.
 
-#### Example:
+#### ⭐ To **add a new project**:
+1. Open the file above.
+2. Find the `projects` array (it’s a list of objects inside `[ ]`).
+3. Copy an existing `{ ... }`, paste it just below, change the details:
+
 ```js
 {
   name: "Weather App",
@@ -45,148 +52,142 @@ Projects are listed on the Projects page and showcased on the home page.
   techStack: ["React", "Tailwind", "OpenWeatherMap"],
   year: 2025,
   image: "https://images.unsplash.com/photo-...jpg",
-  github: "https://github.com/yourname/weather-app",
-  live: "https://weather-app.example.com",
+  github: "https://github.com/yourname/weather-app", // optional
+  live: "https://weather-app.example.com",           // optional
+  videoUrl: "https://..."                            // optional
 }
 ```
+- **name** — Title for your project (required)
+- **description** — Brief description (required)
+- **techStack** — Tools/tech used, as an array (required)
+- **year** — Year finished (required)
+- **image** — Project cover image (required)
+- **github** — Link to code (optional)
+- **live** — Live site link (optional)
+- **videoUrl** — Demo video link (optional)
 
-### ✏️ To **edit a project**:  
-Find the project you want, change its info, and save!
+#### ✏️ To **edit a project**:  
+Just find and change its fields.
 
-### ❌ To **delete a project**:  
-Delete its whole object (`{ ... },`) from the array.
+#### ❌ To **delete a project**:  
+Remove its whole `{ ... },` from the array.
 
 ---
 
-## ✨ How to Edit the "Highlights" Section 
+## ✨ Update "Highlights" Section ("Good at", etc)
 
-This covers “Good at”, “Interested at”, and “Work on” boxes at the top of the About page.
-
-**File to Edit:**  
+**File:**  
 `src/pages/About.tsx`
 
-1. **Find** the `AboutHighlights` component:
-   ```jsx
-   <AboutHighlights
-     goodAt={[ "Item 1", "Item 2", ... ]}
-     interestedAt={[ "Item 1", ... ]}
-     workOn={[ "Item 1", ... ]}
-   />
-   ```
-2. **Change** the lists (`[ ]`) for each as you wish.  
-   - Just add, remove, or edit the strings.
+At the top of the About page, you’ll see 3 boxes: Good at, Interested in, Work on. To change these:
+1. In `About.tsx`, find the component called `<AboutHighlights ... />`.
+2. Edit the lists for each:
+```jsx
+<AboutHighlights
+  goodAt={["AI", "Python"]}
+  interestedAt={["Startups", "RL"]}
+  workOn={["AI Projects"]}
+/>
+```
+Just add or remove items in those `[ ]`.
 
-*You’ll see the boxes update instantly when you save!*
+*Your changes appear instantly after saving!*
 
 ---
 
-## 💼 How to Add or Edit Work Experience
+## 💼 Update Work Experience
 
-**File to Edit:**  
+**File:**  
 `src/pages/About.tsx`
 
-1. **Locate** the `workExperience` array:
-   ```js
-   const workExperience = [
-     {
-       title: "Your Job Title",
-       org: "Company Name",
-       location: "City/Country or Remote",
-       period: "2023 – 2024",
-       description: "What you did.",
-       achievements: [ "Achievement 1", "Achievement 2" ],
-       techs: [ "Tech 1", "Tech 2" ]
-     },
-     // ... more experiences
-   ];
-   ```
-2. **To add new experience**:  
-   - Copy an existing one, paste below, and edit fields.
-3. **To edit**:  
-   - Just change any text.
-4. **To delete:**  
-   - Remove its object from the array.
+Work experiences are stored as an array:
+```js
+const workExperience = [
+  {
+    title: "Data Scientist",
+    org: "Tech Corp",
+    location: "Remote",
+    period: "2023 – 2024",
+    description: "Built ML models...",
+    achievements: [ "Award X" ],
+    techs: [ "Python", "Pandas" ]
+  },
+  // ... more experiences
+];
+```
+- Duplicate and edit for new jobs.
+- Change fields to update.
+- Remove an object (the whole `{ ... },`) to delete a job.
 
-*All fields except `title`, `org`, `period`, and `description` are optional.*
+Only `title`, `org`, `period`, and `description` are required—the others are optional.
 
 ---
 
-## 🎓 How to Add or Edit Education
+## 🎓 Update Education
 
-**File to Edit:**  
+**File:**  
 `src/pages/About.tsx`
 
-1. **Locate** the `education` array:
-   ```js
-   const education = [
-     {
-       title: "Degree or Program",
-       org: "Institution Name",
-       location: "City/Country or Remote",
-       period: "2021 – Present",
-       description: "Short summary.",
-       achievements: [ "Achievement 1" ],
-       techs: [ "Skill 1", "Skill 2" ]
-     },
-     // ... more education items
-   ];
-   ```
-2. **Add, edit, or remove** entries like in Work Experience.
+Similar to work, education is an array:
 
-*Again, only `title`, `org`, `period`, and `description` are required.*
+```js
+const education = [
+  {
+    title: "B.S. in Computer Science",
+    org: "State University",
+    location: "City/Country",
+    period: "2021 – Present",
+    description: "Studied AI and ML.",
+    achievements: [ "Scholarship" ],
+    techs: [ "Python", "React" ]
+  },
+  // ... more entries
+];
+```
+- Duplicate, edit, or delete like for work experience.
 
 ---
 
-## 📚 How to Add or Edit Blog Posts
+## 📚 Update Blog Posts
 
-Blog articles are shown on the Blog page and as featured on the home page.
-
-**File to Edit:**  
+**File:**  
 `src/components/blogData.ts`
 
-### To **add a new blog post**:
-1. **Locate the `blogs` array** in the file.
-2. **Copy and update** an existing object:
-    ```js
-    {
-      title: "Blog Post Title",
-      summary: "A short summary for the homepage card...",
-      tags: ["AI", "Coding"],
-      image: "https://images.unsplash.com/photo-...jpg",
-      date: "2024-06-10",
-      url: "https://medium.com/your-article-link",
-      featured: true, // Use true if you want to show this on homepage
-    }
-    ```
-   - `featured: true` makes it show on the homepage. Only some posts should have this!
-
-### To **edit**:  
-Change a field’s text.
-
-### To **remove**:  
-Delete the blog’s object from the array.
+Blog posts are entries in the `blogs` array:
+```js
+{
+  title: "Why I Love AI",
+  summary: "A short homepage summary...",
+  tags: ["AI", "Coding"],
+  image: "https://images.unsplash.com/photo-...jpg",
+  date: "2024-06-10",
+  url: "https://medium.com/your-article-link",
+  featured: true, // Only some—true = show on home page!
+}
+```
+- Add/edit/remove as with projects.
 
 ---
 
-## 🔗 Summary Table
+## 🔗 Quick Reference Table
 
-| Feature         | Where to edit                               | What to change                    |
-|-----------------|---------------------------------------------|------------------------------------|
-| Projects        | `src/components/projects/projectData.ts`     | Edit the `projects` array          |
-| Highlights      | `src/pages/About.tsx`                       | Edit `<AboutHighlights ... />`     |
-| Work Experience | `src/pages/About.tsx`                       | Edit the `workExperience` array    |
-| Education       | `src/pages/About.tsx`                       | Edit the `education` array         |
-| Blog Posts      | `src/components/blogData.ts`                | Edit the `blogs` array             |
+| Feature         | Where to edit                               | What to change            |
+|-----------------|---------------------------------------------|---------------------------|
+| Projects        | `src/components/projects/projectData.ts`     | `projects` array          |
+| Highlights      | `src/pages/About.tsx`                       | `<AboutHighlights ... />` |
+| Work Experience | `src/pages/About.tsx`                       | `workExperience` array    |
+| Education       | `src/pages/About.tsx`                       | `education` array         |
+| Blogs           | `src/components/blogData.ts`                | `blogs` array             |
 
 ---
 
 ## 💡 Tips
 
-- Always keep object brackets `{ }` and array brackets `[ ]` matched when editing.
-- If you paste image links, use Unsplash or your own links.
-- Save files after changes—updates show up instantly.
-- For bigger changes, you can always ask “How do I…?” here or check [Lovable Docs](https://docs.lovable.dev/).
+- Always keep `{ }` for objects and `[ ]` for lists matched—if you see an error, check brackets!
+- Use Unsplash/your own links for images.
+- Save file after change—see update instantly.
+- For advanced help, ask “How do I…?” in Lovable or check [Lovable Docs](https://docs.lovable.dev/).
 
 ---
 
-Happy customizing your portfolio! 🚀
+_Happy customizing your portfolio! 🚀_
