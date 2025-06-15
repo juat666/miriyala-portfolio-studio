@@ -18,20 +18,27 @@ export interface ProjectData {
 
 interface ProjectCardProps {
   project: ProjectData;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  // Dialog state
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  // Handler for play button click
+  // Handler for play button click (don't propagate to card onClick)
   const handlePlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setDialogOpen(true);
   };
 
   return (
-    <Card className="transition-shadow hover:shadow-lg bg-card animate-fade-in flex flex-col h-full">
+    <Card
+      className="transition-shadow hover:shadow-lg bg-card animate-fade-in flex flex-col h-full cursor-pointer"
+      onClick={onClick}
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${project.name}`}
+      onKeyDown={onClick ? (e) => { if (e.key === "Enter" || e.key === " ") onClick(e as any); } : undefined}
+    >
       <div className="relative">
         <img
           src={project.image}
@@ -39,7 +46,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           className="rounded-t-lg w-full h-40 object-cover"
           loading="lazy"
         />
-        {/* Show video button if videoUrl is available */}
         {project.videoUrl && (
           <>
             <button
@@ -47,6 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 rounded-full p-1 shadow focus:outline-none focus:ring-2 focus:ring-primary z-10 transition"
               type="button"
               aria-label="Play project video"
+              tabIndex={0}
             >
               <Play className="w-6 h-6 text-white" />
             </button>

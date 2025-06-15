@@ -15,6 +15,7 @@ import ProjectCard from "@/components/ProjectCard";
 import ProjectFilterBar from "@/components/ProjectFilterBar";
 import ProjectGrid from "@/components/ProjectGrid";
 import LoadMoreButton from "@/components/LoadMoreButton";
+import ProjectDetailDialog from "@/components/ProjectDetailDialog";
 
 // Sample project data (replace or extend as needed)
 const projects = [
@@ -152,6 +153,10 @@ const Projects = () => {
   const [sortDirection, setSortDirection] = React.useState<"desc" | "asc" | "featured">("desc");
   const [displayCount, setDisplayCount] = React.useState(INITIAL_DISPLAY_COUNT);
 
+  // --- Add state for project modal ---
+  const [detailOpen, setDetailOpen] = React.useState(false);
+  const [selectedProject, setSelectedProject] = React.useState(null);
+
   // Filter logic
   let filteredProjects = selectedTech
     ? projects.filter((p) => p.techStack.includes(selectedTech))
@@ -174,6 +179,12 @@ const Projects = () => {
 
   // Show "Load More" if not all projects are being displayed
   const canLoadMore = displayCount < filteredProjects.length;
+
+  // Handles clicking a project card (except videoButton)
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setDetailOpen(true);
+  };
 
   // Reset the visible projects when the filter or sort changes
   React.useEffect(() => {
@@ -219,8 +230,8 @@ const Projects = () => {
               </button>
             )}
           </div>
-          {/* Projects Grid */}
-          <ProjectGrid projects={displayedProjects} />
+          {/* Projects Grid with project click handler */}
+          <ProjectGrid projects={displayedProjects} onProjectClick={handleProjectClick} />
           {/* No Projects Case */}
           {displayedProjects.length === 0 && (
             <div className="text-center text-muted-foreground font-inter mt-12 animate-fade-in">
@@ -232,6 +243,15 @@ const Projects = () => {
             <LoadMoreButton onClick={() => setDisplayCount((prev) => prev + LOAD_MORE_COUNT)} label={getLoadMoreLabel()} />
           )}
         </section>
+        {/* Modal for project details */}
+        <ProjectDetailDialog
+          open={detailOpen}
+          onOpenChange={(open) => {
+            setDetailOpen(open);
+            if (!open) setSelectedProject(null);
+          }}
+          project={selectedProject}
+        />
       </main>
     </div>
   );
