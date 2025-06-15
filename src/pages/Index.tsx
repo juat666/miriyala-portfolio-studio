@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -96,6 +95,16 @@ const Index = () => {
               </Link>
             </div>
           </div>
+          {/* See All Projects button */}
+          <div className="flex justify-center mt-6">
+            <Button
+              size="lg"
+              className="font-inter px-8 py-3 text-base"
+              onClick={() => navigate("/projects")}
+            >
+              See All Projects
+            </Button>
+          </div>
         </section>
         {/* Blog/Writing Teaser */}
         <section className="relative z-10 mt-14 w-full max-w-4xl mx-auto text-center mb-6">
@@ -106,8 +115,17 @@ const Index = () => {
           <span className="text-sm text-accent-foreground font-inter">
             Let me know if you'd like help drafting one.
           </span>
+          {/* See All Blogs button */}
+          <div className="flex justify-center mt-6">
+            <Button
+              size="lg"
+              className="font-inter px-8 py-3 text-base"
+              onClick={() => navigate("/blog")}
+            >
+              See All Blogs
+            </Button>
+          </div>
         </section>
-
         {/* === New Contact Call-To-Action Section Starts Here === */}
         <section className="w-full mt-16 flex flex-col items-center px-4">
           <div className="max-w-xl w-full bg-muted rounded-lg p-8 shadow flex flex-col items-center gap-4 text-center">
